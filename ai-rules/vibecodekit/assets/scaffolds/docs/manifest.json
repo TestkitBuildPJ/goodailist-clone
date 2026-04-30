@@ -1,0 +1,43 @@
+{
+  "name": "docs",
+  "description": "Documentation site (Pattern D) — Nextra-style MDX docs with sidebar + global search",
+  "stacks": {
+    "nextjs": {
+      "files": [
+        "package.json",
+        "README.md",
+        "next.config.mjs",
+        "tsconfig.json",
+        "vercel.json",
+        ".gitignore",
+        ".env.example",
+        "theme.config.tsx",
+        "pages/_app.mdx",
+        "pages/index.mdx",
+        "pages/_meta.json",
+        "pages/intro/_meta.json",
+        "pages/intro/getting-started.mdx",
+        "pages/guide/_meta.json",
+        "pages/guide/configuration.mdx"
+      ],
+      "post_install": [
+        "npm install",
+        "npm run dev"
+      ],
+      "success_criteria": [
+        "package.json exists",
+        "package.json has 'nextra' in dependencies",
+        "package.json has 'next' in dependencies",
+        "theme.config.tsx exists",
+        "pages/index.mdx exists",
+        "pages/intro/getting-started.mdx exists",
+        "pages/guide/configuration.mdx exists",
+        "next.config.mjs exists",
+        "tsconfig.json exists",
+        "vercel.json exists",
+        ".gitignore exists",
+        ".env.example exists"
+      ]
+    }
+  }
+}

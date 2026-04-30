@@ -1,0 +1,18 @@
+# Cài đặt
+
+```bash
+npm install
+npm run dev
+```
+
+Mở `http://localhost:3000` → bạn sẽ thấy trang chủ và sidebar được nạp
+từ `pages/_meta.json`.
+
+## Bước tiếp theo
+
+1. Sửa `theme.config.tsx` để đổi logo + GitHub repo URL.
+2. Thêm trang mới bằng cách tạo `pages/<section>/<slug>.mdx`.
+3. Đăng ký trang trong `pages/<section>/_meta.json` để nó xuất hiện
+   trong sidebar.
+4. (Tùy chọn) bật Algolia DocSearch — set 3 biến `NEXT_PUBLIC_ALGOLIA_*`
+   trong `.env.local`.

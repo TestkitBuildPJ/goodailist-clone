@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% set active = 'charts' %}
+{% block title %}Charts · goodailist-clone{% endblock %}
+{% block content %}
+<section class="bg-white border border-slate-200 rounded shadow-sm p-6">
+  <h1 class="text-lg font-semibold mb-1">Cumulative Star Count Over Time</h1>
+  <p class="text-sm text-slate-500 mb-4">
+    Per-category cumulative GitHub stars summed across all seed repos. Phase A
+    approximation; Phase B will ingest live time-series.
+  </p>
+  <div class="h-[480px]"><canvas id="cum-stars" data-testid="cum-stars-canvas"></canvas></div>
+</section>
+
+<script id="series-data" type="application/json">{{ series|tojson }}</script>
+<script>
+  (function () {
+    const raw = JSON.parse(document.getElementById("series-data").textContent);
+    const palette = ["#2563eb", "#16a34a", "#dc2626", "#ea580c", "#7c3aed", "#0891b2", "#db2777"];
+    const datasets = raw.map((s, i) => ({
+      label: s.category,
+      data: s.points.map(p => ({ x: p.date, y: p.stars })),
+      borderColor: palette[i % palette.length],
+      backgroundColor: palette[i % palette.length] + "33",
+      tension: 0.2,
+      borderWidth: 2,
+      pointRadius: 2,
+    }));
+    const ctx = document.getElementById("cum-stars");
+    new Chart(ctx, {
+      type: "line",
+      data: { datasets },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { type: "time", time: { unit: "year" }, title: { display: true, text: "Date" } },
+          y: { beginAtZero: true, title: { display: true, text: "Cumulative stars" } },
+        },
+        plugins: { legend: { position: "bottom" } },
+      },
+    });
+  })();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+{% endblock %}

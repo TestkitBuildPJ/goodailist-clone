@@ -1,0 +1,2414 @@
+{
+  "$schema": "https://vibecodekit.dev/schema/rri-question-bank-1.1.json",
+  "version": "1.2.0",
+  "generated_by": "build_rri_bank.py (FIX-003 + v0.11.4 Obs-1)",
+  "personas": [
+    "end_user",
+    "ba",
+    "qa",
+    "developer",
+    "operator"
+  ],
+  "modes": [
+    "CHALLENGE",
+    "GUIDED",
+    "EXPLORE"
+  ],
+  "thresholds": {
+    "landing": 25,
+    "saas": 50,
+    "dashboard": 35,
+    "blog": 25,
+    "docs": 30,
+    "portfolio": 25,
+    "ecommerce": 40,
+    "enterprise-module": 45,
+    "custom": 15,
+    "api": 28,
+    "crm": 28,
+    "mobile": 28
+  },
+  "project_types": {
+    "landing": {
+      "expected_min": 25,
+      "actual": 26,
+      "missing_cells": [],
+      "questions": [
+        {
+          "id": "L-EU-EX-01",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "Khách hàng mục tiêu là ai và họ đến trang này từ kênh nào (FB ads, Google, organic)?"
+        },
+        {
+          "id": "L-EU-EX-02",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "Trong 5 giây đầu, người dùng phải hiểu sản phẩm này dùng để làm gì — bạn muốn họ hiểu chính xác câu nào?"
+        },
+        {
+          "id": "L-EU-GU-01",
+          "persona": "end_user",
+          "mode": "GUIDED",
+          "q": "Hành động chính bạn muốn người dùng thực hiện: (a) đăng ký demo, (b) mua trực tiếp, (c) tải tài liệu, (d) khác?"
+        },
+        {
+          "id": "L-EU-CH-01",
+          "persona": "end_user",
+          "mode": "CHALLENGE",
+          "q": "Nếu khách hàng KHÔNG nhấn CTA chính trong 30 giây đầu, bạn coi đó là thất bại hay vẫn ổn?"
+        },
+        {
+          "id": "L-EU-CH-02",
+          "persona": "end_user",
+          "mode": "CHALLENGE",
+          "q": "Có khách hàng nào KHÔNG nên thấy trang này (sai phân khúc, sai khu vực)? Cách lọc?"
+        },
+        {
+          "id": "L-BA-GU-01",
+          "persona": "ba",
+          "mode": "GUIDED",
+          "q": "Mục tiêu kinh doanh chính: lead gen, brand awareness, hay direct sale? Chọn một."
+        },
+        {
+          "id": "L-BA-EX-01",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "Định nghĩa 'conversion thành công' ở đây là gì (gửi form / click CTA / scroll 90%)?"
+        },
+        {
+          "id": "L-BA-CH-01",
+          "persona": "ba",
+          "mode": "CHALLENGE",
+          "q": "Nếu A/B test cho thấy CTA tiếng Anh convert tốt hơn tiếng Việt, bạn vẫn giữ tiếng Việt vì lý do gì?"
+        },
+        {
+          "id": "L-BA-EX-02",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "Budget cho lead acquisition (CAC) là bao nhiêu? Trang phải convert ít nhất bao nhiêu % để hòa vốn?"
+        },
+        {
+          "id": "L-BA-GU-02",
+          "persona": "ba",
+          "mode": "GUIDED",
+          "q": "Kênh marketing chính dẫn về landing: (a) Google Ads, (b) FB/IG Ads, (c) SEO, (d) email, (e) hỗn hợp?"
+        },
+        {
+          "id": "L-QA-CH-01",
+          "persona": "qa",
+          "mode": "CHALLENGE",
+          "q": "Khi form submit fail (network drop), copy báo lỗi nào sẽ giữ được người dùng không bỏ?"
+        },
+        {
+          "id": "L-QA-EX-01",
+          "persona": "qa",
+          "mode": "EXPLORE",
+          "q": "Có cần test trên 3G chậm không? PageSpeed Insights mục tiêu Mobile bao nhiêu?"
+        },
+        {
+          "id": "L-QA-GU-01",
+          "persona": "qa",
+          "mode": "GUIDED",
+          "q": "Thiết bị tối thiểu cần hỗ trợ: (a) iPhone SE, (b) iPhone 8+, (c) iPhone 12+? Android tương đương?"
+        },
+        {
+          "id": "L-QA-CH-02",
+          "persona": "qa",
+          "mode": "CHALLENGE",
+          "q": "Nếu Google Tag Manager chặn (do adblocker), trang còn track được conversion không?"
+        },
+        {
+          "id": "L-QA-EX-02",
+          "persona": "qa",
+          "mode": "EXPLORE",
+          "q": "Test bao nhiêu trình duyệt? Có IE11 không (legacy enterprise)?"
+        },
+        {
+          "id": "L-DV-GU-01",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "Hosting: (a) Vercel, (b) Cloudflare Pages, (c) Netlify, (d) self-host VPS?"
+        },
+        {
+          "id": "L-DV-EX-01",
+          "persona": "developer",
+          "mode": "EXPLORE",
+          "q": "Form submit gửi đi đâu — Resend / Sendgrid / serverless function / CRM API?"
+        },
+        {
+          "id": "L-DV-CH-01",
+          "persona": "developer",
+          "mode": "CHALLENGE",
+          "q": "Tại sao KHÔNG dùng plain HTML + Tailwind CDN cho trang này (đỡ build pipeline)?"
+        },
+        {
+          "id": "L-DV-EX-02",
+          "persona": "developer",
+          "mode": "EXPLORE",
+          "q": "Cần CMS không, hay copy hard-code trong MDX?"
+        },
+        {
+          "id": "L-DV-GU-02",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "Animation: (a) chỉ CSS, (b) Framer Motion, (c) Lottie, (d) không animation?"
+        },
+        {
+          "id": "L-OP-EX-01",
+          "persona": "operator",
+          "mode": "EXPLORE",
+          "q": "Trang sẽ chịu peak traffic bao nhiêu pageview/giờ vào ngày launch?"
+        },
+        {
+          "id": "L-OP-GU-01",
+          "persona": "operator",
+          "mode": "GUIDED",
+          "q": "Theo dõi: (a) GA4, (b) Plausible, (c) PostHog, (d) hỗn hợp?"
+        },
+        {
+          "id": "L-OP-CH-01",
+          "persona": "operator",
+          "mode": "CHALLENGE",
+          "q": "Nếu Vercel down 30 phút giữa peak campaign, fallback của bạn là gì?"
+        },
+        {
+          "id": "L-OP-EX-02",
+          "persona": "operator",
+          "mode": "EXPLORE",
+          "q": "Domain SSL — Let's Encrypt qua Vercel, hay enterprise CA?"
+        },
+        {
+          "id": "L-OP-GU-02",
+          "persona": "operator",
+          "mode": "GUIDED",
+          "q": "Backup copy/asset: (a) chỉ git, (b) git + S3 mirror, (c) git + CDN snapshot?"
+        },
+        {
+          "id": "L-OP-CH-02",
+          "persona": "operator",
+          "mode": "CHALLENGE",
+          "q": "Khi marketing tắt campaign nhưng quên gỡ pixel, bạn phát hiện như thế nào?"
+        }
+      ]
+    },
+    "saas": {
+      "expected_min": 50,
+      "actual": 51,
+      "missing_cells": [],
+      "questions": [
+        {
+          "id": "S-EU-EX-01",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "Một ngày làm việc điển hình của user persona chính là gì? Họ mở app khi nào?"
+        },
+        {
+          "id": "S-EU-EX-02",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "Từ lúc đăng ký đến lúc thấy giá trị đầu tiên (TTV), bạn muốn rút ngắn xuống bao nhiêu phút?"
+        },
+        {
+          "id": "S-EU-GU-01",
+          "persona": "end_user",
+          "mode": "GUIDED",
+          "q": "Onboarding mặc định: (a) tour 5 bước, (b) sample data, (c) empty state + tooltip, (d) video?"
+        },
+        {
+          "id": "S-EU-GU-02",
+          "persona": "end_user",
+          "mode": "GUIDED",
+          "q": "Tier free: (a) hạn theo seat, (b) hạn theo project, (c) hạn theo dòng dữ liệu, (d) trial 14 ngày rồi tắt?"
+        },
+        {
+          "id": "S-EU-CH-01",
+          "persona": "end_user",
+          "mode": "CHALLENGE",
+          "q": "Nếu user chỉ dùng 1 tính năng và không bao giờ chạm tới phần còn lại, bạn coi là happy hay churn risk?"
+        },
+        {
+          "id": "S-EU-CH-02",
+          "persona": "end_user",
+          "mode": "CHALLENGE",
+          "q": "Khi mạng mất 30 giây, phần nào của UI vẫn phải dùng được offline?"
+        },
+        {
+          "id": "S-EU-EX-03",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "Người dùng thường ở vai trò gì trong tổ chức (admin, member, viewer)? Quyền gì khác nhau?"
+        },
+        {
+          "id": "S-EU-GU-03",
+          "persona": "end_user",
+          "mode": "GUIDED",
+          "q": "Notification mặc định: (a) tắt hết, (b) chỉ in-app, (c) email digest hằng ngày, (d) realtime push?"
+        },
+        {
+          "id": "S-EU-EX-04",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "Có persona thứ hai (đối lập) nào dùng app này không (ví dụ end-user vs manager)?"
+        },
+        {
+          "id": "S-EU-CH-03",
+          "persona": "end_user",
+          "mode": "CHALLENGE",
+          "q": "Có usecase nào KHÔNG nên hỗ trợ (intentional non-goal) để giữ scope?"
+        },
+        {
+          "id": "S-EU-EX-05",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "Mobile có phải là first-class hay chỉ là responsive web?"
+        },
+        {
+          "id": "S-BA-GU-01",
+          "persona": "ba",
+          "mode": "GUIDED",
+          "q": "Pricing: (a) free + paid tier, (b) only paid, (c) freemium-with-limit, (d) usage-based?"
+        },
+        {
+          "id": "S-BA-EX-01",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "Đối thủ trực tiếp là ai? Họ tính giá thế nào?"
+        },
+        {
+          "id": "S-BA-EX-02",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "Định nghĩa MRR target sau 6 tháng. CAC mục tiêu? LTV?"
+        },
+        {
+          "id": "S-BA-CH-01",
+          "persona": "ba",
+          "mode": "CHALLENGE",
+          "q": "Nếu pricing đối thủ giảm 50%, bạn phản ứng cách nào KHÔNG phải giảm theo?"
+        },
+        {
+          "id": "S-BA-GU-02",
+          "persona": "ba",
+          "mode": "GUIDED",
+          "q": "Phương thức thanh toán: (a) chỉ Stripe, (b) Stripe + VNPay/MoMo, (c) wire transfer cho B2B?"
+        },
+        {
+          "id": "S-BA-EX-03",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "Có cần xuất hóa đơn VAT (red invoice) cho khách Việt Nam không?"
+        },
+        {
+          "id": "S-BA-CH-02",
+          "persona": "ba",
+          "mode": "CHALLENGE",
+          "q": "Bạn có sẵn sàng từ chối khách hàng yêu cầu custom feature ngoài roadmap không?"
+        },
+        {
+          "id": "S-BA-GU-03",
+          "persona": "ba",
+          "mode": "GUIDED",
+          "q": "GTM chính: (a) self-serve free, (b) sales-led, (c) PLG + sales-assist, (d) channel partner?"
+        },
+        {
+          "id": "S-BA-EX-04",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "Định nghĩa qualified lead — đến đâu thì sales mới được vào?"
+        },
+        {
+          "id": "S-BA-EX-05",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "Tỷ lệ retention mục tiêu sau 30/90 ngày là bao nhiêu?"
+        },
+        {
+          "id": "S-QA-EX-01",
+          "persona": "qa",
+          "mode": "EXPLORE",
+          "q": "Định nghĩa critical path test (smoke test) — chạy bao nhiêu phút?"
+        },
+        {
+          "id": "S-QA-GU-01",
+          "persona": "qa",
+          "mode": "GUIDED",
+          "q": "Test data: (a) seed deterministic, (b) faker, (c) production-snapshot scrubbed?"
+        },
+        {
+          "id": "S-QA-CH-01",
+          "persona": "qa",
+          "mode": "CHALLENGE",
+          "q": "Nếu billing fail giữa upgrade flow, làm sao đảm bảo không double-charge?"
+        },
+        {
+          "id": "S-QA-CH-02",
+          "persona": "qa",
+          "mode": "CHALLENGE",
+          "q": "Khi 1000 user đồng thời tạo project, race condition nào có thể xảy ra?"
+        },
+        {
+          "id": "S-QA-GU-02",
+          "persona": "qa",
+          "mode": "GUIDED",
+          "q": "Multi-tenant isolation: (a) shared DB + tenant_id, (b) DB-per-tenant, (c) schema-per-tenant?"
+        },
+        {
+          "id": "S-QA-EX-02",
+          "persona": "qa",
+          "mode": "EXPLORE",
+          "q": "Cần SOC2 / ISO27001 không? Khi nào?"
+        },
+        {
+          "id": "S-QA-CH-03",
+          "persona": "qa",
+          "mode": "CHALLENGE",
+          "q": "Nếu một tenant gửi 1M requests/giờ, các tenant khác bị ảnh hưởng thế nào?"
+        },
+        {
+          "id": "S-QA-GU-03",
+          "persona": "qa",
+          "mode": "GUIDED",
+          "q": "Auth: (a) email+password, (b) magic link, (c) SSO SAML, (d) OAuth Google/GitHub?"
+        },
+        {
+          "id": "S-QA-EX-03",
+          "persona": "qa",
+          "mode": "EXPLORE",
+          "q": "Audit log: lưu gì, retention bao lâu, ai đọc được?"
+        },
+        {
+          "id": "S-QA-EX-04",
+          "persona": "qa",
+          "mode": "EXPLORE",
+          "q": "Test môi trường: dev / staging / prod — staging có data thật không?"
+        },
+        {
+          "id": "S-DV-GU-01",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "DB chính: (a) Postgres, (b) MySQL, (c) MongoDB, (d) SQLite (start small)?"
+        },
+        {
+          "id": "S-DV-GU-02",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "ORM: (a) Prisma, (b) Drizzle, (c) raw SQL, (d) TypeORM?"
+        },
+        {
+          "id": "S-DV-GU-03",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "Background job: (a) Inngest, (b) Trigger.dev, (c) BullMQ, (d) cron đơn giản?"
+        },
+        {
+          "id": "S-DV-EX-01",
+          "persona": "developer",
+          "mode": "EXPLORE",
+          "q": "API style: REST, tRPC, GraphQL — vì sao chọn cái đó?"
+        },
+        {
+          "id": "S-DV-CH-01",
+          "persona": "developer",
+          "mode": "CHALLENGE",
+          "q": "Tại sao KHÔNG dùng Supabase và phải tự build auth + db?"
+        },
+        {
+          "id": "S-DV-CH-02",
+          "persona": "developer",
+          "mode": "CHALLENGE",
+          "q": "Nếu Vercel đổi pricing, migration sang Cloudflare/Fly mất bao lâu?"
+        },
+        {
+          "id": "S-DV-EX-02",
+          "persona": "developer",
+          "mode": "EXPLORE",
+          "q": "File upload: trực tiếp lên S3 hay qua server?"
+        },
+        {
+          "id": "S-DV-GU-04",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "Email: (a) Resend, (b) Sendgrid, (c) Postmark, (d) AWS SES?"
+        },
+        {
+          "id": "S-DV-EX-03",
+          "persona": "developer",
+          "mode": "EXPLORE",
+          "q": "Realtime updates cần WebSocket / SSE / long-poll?"
+        },
+        {
+          "id": "S-DV-CH-03",
+          "persona": "developer",
+          "mode": "CHALLENGE",
+          "q": "Nếu DB migration ở prod fail giữa chừng, rollback strategy là gì?"
+        },
+        {
+          "id": "S-OP-EX-01",
+          "persona": "operator",
+          "mode": "EXPLORE",
+          "q": "SLO mục tiêu: 99.9% / 99.95% / 99.99%? Ý nghĩa cụ thể với user?"
+        },
+        {
+          "id": "S-OP-GU-01",
+          "persona": "operator",
+          "mode": "GUIDED",
+          "q": "Monitoring: (a) Sentry only, (b) Sentry + Datadog, (c) Grafana stack tự host, (d) Honeycomb?"
+        },
+        {
+          "id": "S-OP-EX-02",
+          "persona": "operator",
+          "mode": "EXPLORE",
+          "q": "Backup tần suất: hourly snapshot / daily / on-write WAL?"
+        },
+        {
+          "id": "S-OP-CH-01",
+          "persona": "operator",
+          "mode": "CHALLENGE",
+          "q": "Nếu prod DB bị xóa nhầm, RTO mục tiêu là bao nhiêu? RPO?"
+        },
+        {
+          "id": "S-OP-GU-02",
+          "persona": "operator",
+          "mode": "GUIDED",
+          "q": "Deploy frequency: (a) on-merge, (b) hằng ngày, (c) hằng tuần, (d) sprint?"
+        },
+        {
+          "id": "S-OP-EX-03",
+          "persona": "operator",
+          "mode": "EXPLORE",
+          "q": "Có cần on-call 24/7 không? Ai trực?"
+        },
+        {
+          "id": "S-OP-CH-02",
+          "persona": "operator",
+          "mode": "CHALLENGE",
+          "q": "Khi tenant lớn bùng nổ traffic 100x trong 1 giờ, alert và auto-scale có kịp không?"
+        },
+        {
+          "id": "S-OP-GU-03",
+          "persona": "operator",
+          "mode": "GUIDED",
+          "q": "Secrets: (a) Vercel env, (b) Doppler, (c) Vault, (d) AWS SSM?"
+        },
+        {
+          "id": "S-OP-EX-04",
+          "persona": "operator",
+          "mode": "EXPLORE",
+          "q": "Plan compliance dữ liệu (GDPR / VN PDPL): residency yêu cầu?"
+        },
+        {
+          "id": "S-OP-CH-03",
+          "persona": "operator",
+          "mode": "CHALLENGE",
+          "q": "Nếu một enterprise tenant yêu cầu xoá toàn bộ data trong 24h, quy trình tự động hay tay?"
+        }
+      ]
+    },
+    "dashboard": {
+      "expected_min": 35,
+      "actual": 35,
+      "missing_cells": [],
+      "questions": [
+        {
+          "id": "D-EU-EX-01",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "Người xem dashboard này là ai (CEO, ops manager, analyst)? Họ xem mỗi ngày vào lúc nào?"
+        },
+        {
+          "id": "D-EU-EX-02",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "3 con số quan trọng nhất phải xuất hiện above-the-fold là gì?"
+        },
+        {
+          "id": "D-EU-GU-01",
+          "persona": "end_user",
+          "mode": "GUIDED",
+          "q": "Filter mặc định khi mở: (a) hôm nay, (b) 7 ngày, (c) tháng hiện tại, (d) custom?"
+        },
+        {
+          "id": "D-EU-CH-01",
+          "persona": "end_user",
+          "mode": "CHALLENGE",
+          "q": "Nếu chỉ được giữ MỘT chart và bỏ tất cả còn lại, đó là chart nào?"
+        },
+        {
+          "id": "D-EU-GU-02",
+          "persona": "end_user",
+          "mode": "GUIDED",
+          "q": "Drill-down: (a) click chart mở detail, (b) hover tooltip, (c) modal, (d) nav sang trang khác?"
+        },
+        {
+          "id": "D-EU-CH-02",
+          "persona": "end_user",
+          "mode": "CHALLENGE",
+          "q": "Có user nào CẦN dashboard này nhưng KHÔNG có quyền thấy số tài chính?"
+        },
+        {
+          "id": "D-EU-EX-03",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "Có cần xem trên TV (display mode) không?"
+        },
+        {
+          "id": "D-BA-EX-01",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "KPI bắc buộc track theo north-star metric — đó là gì?"
+        },
+        {
+          "id": "D-BA-GU-01",
+          "persona": "ba",
+          "mode": "GUIDED",
+          "q": "Phạm vi dữ liệu: (a) all-time, (b) chỉ data 90 ngày, (c) live tail, (d) tuần trước?"
+        },
+        {
+          "id": "D-BA-CH-01",
+          "persona": "ba",
+          "mode": "CHALLENGE",
+          "q": "Nếu một metric đo sai (data quality issue), bạn ưu tiên ẩn hay hiện kèm cảnh báo?"
+        },
+        {
+          "id": "D-BA-EX-02",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "Định nghĩa segment cohort: theo gì (signup_date / plan / region)?"
+        },
+        {
+          "id": "D-BA-GU-02",
+          "persona": "ba",
+          "mode": "GUIDED",
+          "q": "Export: (a) CSV, (b) Excel, (c) PDF report, (d) embed link share?"
+        },
+        {
+          "id": "D-BA-CH-02",
+          "persona": "ba",
+          "mode": "CHALLENGE",
+          "q": "Có metric nào VANITY không phải actionable? Có muốn ẩn đi không?"
+        },
+        {
+          "id": "D-BA-EX-03",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "Goal/target có hiển thị overlay trên chart không?"
+        },
+        {
+          "id": "D-QA-EX-01",
+          "persona": "qa",
+          "mode": "EXPLORE",
+          "q": "Khi data source delay 2 giờ, dashboard cảnh báo thế nào?"
+        },
+        {
+          "id": "D-QA-GU-01",
+          "persona": "qa",
+          "mode": "GUIDED",
+          "q": "Aggregation: (a) precomputed nightly, (b) on-the-fly query, (c) materialized view, (d) cache?"
+        },
+        {
+          "id": "D-QA-CH-01",
+          "persona": "qa",
+          "mode": "CHALLENGE",
+          "q": "Nếu dashboard load > 5s, user bỏ — bạn sẽ degrade UX thế nào?"
+        },
+        {
+          "id": "D-QA-EX-02",
+          "persona": "qa",
+          "mode": "EXPLORE",
+          "q": "Có data row level security cần test cho mỗi role không?"
+        },
+        {
+          "id": "D-QA-CH-02",
+          "persona": "qa",
+          "mode": "CHALLENGE",
+          "q": "Nếu một widget chart crash, các widget khác có ảnh hưởng không?"
+        },
+        {
+          "id": "D-QA-GU-02",
+          "persona": "qa",
+          "mode": "GUIDED",
+          "q": "Date range max: (a) 90 ngày, (b) 1 năm, (c) all-time, (d) configurable?"
+        },
+        {
+          "id": "D-QA-EX-03",
+          "persona": "qa",
+          "mode": "EXPLORE",
+          "q": "Test với data zero (tài khoản mới) — empty state design ra sao?"
+        },
+        {
+          "id": "D-DV-GU-01",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "Chart lib: (a) Recharts, (b) ECharts, (c) D3 raw, (d) ApexCharts?"
+        },
+        {
+          "id": "D-DV-GU-02",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "Data fetching: (a) TanStack Query, (b) SWR, (c) RSC streaming, (d) websocket?"
+        },
+        {
+          "id": "D-DV-EX-01",
+          "persona": "developer",
+          "mode": "EXPLORE",
+          "q": "Dataset lớn (> 100k rows) — render virtualized table hay aggregate trên server?"
+        },
+        {
+          "id": "D-DV-CH-01",
+          "persona": "developer",
+          "mode": "CHALLENGE",
+          "q": "Tại sao KHÔNG dùng Metabase/Looker và phải tự build?"
+        },
+        {
+          "id": "D-DV-GU-03",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "Cache: (a) Redis, (b) Vercel KV, (c) Postgres materialized view, (d) không cache?"
+        },
+        {
+          "id": "D-DV-EX-02",
+          "persona": "developer",
+          "mode": "EXPLORE",
+          "q": "Realtime widget — polling 5s hay WebSocket?"
+        },
+        {
+          "id": "D-DV-CH-02",
+          "persona": "developer",
+          "mode": "CHALLENGE",
+          "q": "Nếu user export 1M dòng CSV, server có chịu nổi không? Stream hay queue?"
+        },
+        {
+          "id": "D-OP-EX-01",
+          "persona": "operator",
+          "mode": "EXPLORE",
+          "q": "Pipeline ETL chạy lúc nào, fail thì retry/alert thế nào?"
+        },
+        {
+          "id": "D-OP-GU-01",
+          "persona": "operator",
+          "mode": "GUIDED",
+          "q": "Lưu raw event vào: (a) S3, (b) ClickHouse, (c) BigQuery, (d) Postgres?"
+        },
+        {
+          "id": "D-OP-CH-01",
+          "persona": "operator",
+          "mode": "CHALLENGE",
+          "q": "Nếu metric calc sai 1 ngày, có rollback / re-run nightly job được không?"
+        },
+        {
+          "id": "D-OP-EX-02",
+          "persona": "operator",
+          "mode": "EXPLORE",
+          "q": "Permission: ai được tạo dashboard mới, ai chỉ xem?"
+        },
+        {
+          "id": "D-OP-GU-02",
+          "persona": "operator",
+          "mode": "GUIDED",
+          "q": "Alert: (a) Slack, (b) email, (c) PagerDuty, (d) webhook?"
+        },
+        {
+          "id": "D-OP-CH-02",
+          "persona": "operator",
+          "mode": "CHALLENGE",
+          "q": "Khi data source thay đổi schema, bạn phát hiện như thế nào trước khi user thấy?"
+        },
+        {
+          "id": "D-OP-EX-03",
+          "persona": "operator",
+          "mode": "EXPLORE",
+          "q": "Audit: ai xem dashboard nào, lưu log bao lâu?"
+        }
+      ]
+    },
+    "blog": {
+      "expected_min": 25,
+      "actual": 25,
+      "missing_cells": [],
+      "questions": [
+        {
+          "id": "B-EU-EX-01",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "Reader persona là ai (developer, designer, founder, sinh viên)?"
+        },
+        {
+          "id": "B-EU-GU-01",
+          "persona": "end_user",
+          "mode": "GUIDED",
+          "q": "Reading time hiển thị: (a) trên top, (b) progress bar, (c) cả hai, (d) không hiển thị?"
+        },
+        {
+          "id": "B-EU-CH-01",
+          "persona": "end_user",
+          "mode": "CHALLENGE",
+          "q": "Nếu reader chỉ đọc tựa đề rồi rời, bạn coi là thất bại hay vẫn ổn?"
+        },
+        {
+          "id": "B-EU-EX-02",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "Có cần dark mode mặc định cho reader đêm không?"
+        },
+        {
+          "id": "B-EU-GU-02",
+          "persona": "end_user",
+          "mode": "GUIDED",
+          "q": "Comment: (a) tắt, (b) Disqus, (c) GitHub Discussions, (d) email reply?"
+        },
+        {
+          "id": "B-BA-EX-01",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "Mục tiêu blog: SEO traffic, brand authority, lead gen, recruiting?"
+        },
+        {
+          "id": "B-BA-GU-01",
+          "persona": "ba",
+          "mode": "GUIDED",
+          "q": "Tần suất publish: (a) hằng ngày, (b) tuần, (c) khi có nội dung, (d) tháng?"
+        },
+        {
+          "id": "B-BA-CH-01",
+          "persona": "ba",
+          "mode": "CHALLENGE",
+          "q": "Nếu một bài viral nhưng off-topic, bạn pin lên top hay archive?"
+        },
+        {
+          "id": "B-BA-EX-02",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "Tag/category — limit bao nhiêu để không loãng?"
+        },
+        {
+          "id": "B-BA-GU-02",
+          "persona": "ba",
+          "mode": "GUIDED",
+          "q": "Author: (a) một người duy nhất, (b) team nội bộ, (c) mời guest, (d) hỗn hợp?"
+        },
+        {
+          "id": "B-QA-CH-01",
+          "persona": "qa",
+          "mode": "CHALLENGE",
+          "q": "Khi RSS feed broken, có alert tự động không?"
+        },
+        {
+          "id": "B-QA-GU-01",
+          "persona": "qa",
+          "mode": "GUIDED",
+          "q": "Bài viết support: (a) chỉ Markdown, (b) MDX (component), (c) WYSIWYG, (d) Notion sync?"
+        },
+        {
+          "id": "B-QA-EX-01",
+          "persona": "qa",
+          "mode": "EXPLORE",
+          "q": "Lighthouse target Mobile bao nhiêu (90+, 95+, 100)?"
+        },
+        {
+          "id": "B-QA-CH-02",
+          "persona": "qa",
+          "mode": "CHALLENGE",
+          "q": "Nếu Google ngừng index, plan B traffic là gì?"
+        },
+        {
+          "id": "B-QA-GU-02",
+          "persona": "qa",
+          "mode": "GUIDED",
+          "q": "Image optim: (a) next/image AVIF, (b) Cloudinary, (c) tự host, (d) hỗn hợp?"
+        },
+        {
+          "id": "B-DV-GU-01",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "Engine: (a) Next.js + MDX, (b) Astro, (c) Hugo static, (d) WordPress headless?"
+        },
+        {
+          "id": "B-DV-EX-01",
+          "persona": "developer",
+          "mode": "EXPLORE",
+          "q": "Code highlight: rehype-pretty-code, Shiki, Prism — chọn dựa trên gì?"
+        },
+        {
+          "id": "B-DV-CH-01",
+          "persona": "developer",
+          "mode": "CHALLENGE",
+          "q": "Tại sao KHÔNG dùng Substack và phải tự host?"
+        },
+        {
+          "id": "B-DV-GU-02",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "Author bio: (a) frontmatter trong MDX, (b) authors.json, (c) CMS, (d) hard-code?"
+        },
+        {
+          "id": "B-DV-EX-02",
+          "persona": "developer",
+          "mode": "EXPLORE",
+          "q": "Có cần OG image dynamic không? Generate bằng gì?"
+        },
+        {
+          "id": "B-OP-EX-01",
+          "persona": "operator",
+          "mode": "EXPLORE",
+          "q": "Tần suất rebuild static (incremental, nightly, on-push)?"
+        },
+        {
+          "id": "B-OP-GU-01",
+          "persona": "operator",
+          "mode": "GUIDED",
+          "q": "CDN: (a) Vercel, (b) Cloudflare, (c) BunnyCDN, (d) tự host?"
+        },
+        {
+          "id": "B-OP-CH-01",
+          "persona": "operator",
+          "mode": "CHALLENGE",
+          "q": "Khi viết bài có chứa lỗi typo critical, hot-fix mất bao lâu?"
+        },
+        {
+          "id": "B-OP-EX-02",
+          "persona": "operator",
+          "mode": "EXPLORE",
+          "q": "Backup nội dung — chỉ git, hay sync sang S3?"
+        },
+        {
+          "id": "B-OP-GU-02",
+          "persona": "operator",
+          "mode": "GUIDED",
+          "q": "Newsletter: (a) Buttondown, (b) ConvertKit, (c) Substack, (d) tự build?"
+        }
+      ]
+    },
+    "docs": {
+      "expected_min": 30,
+      "actual": 30,
+      "missing_cells": [],
+      "questions": [
+        {
+          "id": "DC-EU-EX-01",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "Audience chính là developer external hay internal team?"
+        },
+        {
+          "id": "DC-EU-EX-02",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "User landing trang docs từ đâu (search, CTA in app, GitHub README)?"
+        },
+        {
+          "id": "DC-EU-GU-01",
+          "persona": "end_user",
+          "mode": "GUIDED",
+          "q": "Search: (a) Algolia DocSearch, (b) self-host MeiliSearch, (c) cmd-K only, (d) không?"
+        },
+        {
+          "id": "DC-EU-CH-01",
+          "persona": "end_user",
+          "mode": "CHALLENGE",
+          "q": "Nếu user hỏi câu trong docs đã có nhưng không tìm thấy, bạn phát hiện như thế nào?"
+        },
+        {
+          "id": "DC-EU-GU-02",
+          "persona": "end_user",
+          "mode": "GUIDED",
+          "q": "Sidebar tổ chức: (a) theo persona, (b) theo workflow, (c) alphabetical, (d) versioned?"
+        },
+        {
+          "id": "DC-EU-CH-02",
+          "persona": "end_user",
+          "mode": "CHALLENGE",
+          "q": "Có nên có 'Quick start' < 5 phút riêng cho người mới hoàn toàn?"
+        },
+        {
+          "id": "DC-BA-EX-01",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "Mục tiêu docs: giảm support ticket, dev adoption, hay compliance?"
+        },
+        {
+          "id": "DC-BA-GU-01",
+          "persona": "ba",
+          "mode": "GUIDED",
+          "q": "Multilingual: (a) chỉ tiếng Anh, (b) Anh + Việt, (c) Anh + Việt + Nhật, (d) community-translated?"
+        },
+        {
+          "id": "DC-BA-CH-01",
+          "persona": "ba",
+          "mode": "CHALLENGE",
+          "q": "Nếu docs không update theo product release, ai chịu trách nhiệm phát hiện?"
+        },
+        {
+          "id": "DC-BA-EX-02",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "KPI docs (page views, search-no-result, feedback thumbs)?"
+        },
+        {
+          "id": "DC-BA-GU-02",
+          "persona": "ba",
+          "mode": "GUIDED",
+          "q": "Versioning: (a) latest only, (b) latest + 1 LTS, (c) tất cả major, (d) không version?"
+        },
+        {
+          "id": "DC-BA-CH-02",
+          "persona": "ba",
+          "mode": "CHALLENGE",
+          "q": "Có docs cho product chưa GA không (early access)?"
+        },
+        {
+          "id": "DC-QA-CH-01",
+          "persona": "qa",
+          "mode": "CHALLENGE",
+          "q": "Code sample trong docs có CI test thật không?"
+        },
+        {
+          "id": "DC-QA-EX-01",
+          "persona": "qa",
+          "mode": "EXPLORE",
+          "q": "Broken link checker — tần suất, alert ở đâu?"
+        },
+        {
+          "id": "DC-QA-GU-01",
+          "persona": "qa",
+          "mode": "GUIDED",
+          "q": "Spell-check VN: (a) custom dict, (b) tools mặc định, (c) review thủ công, (d) AI assist?"
+        },
+        {
+          "id": "DC-QA-CH-02",
+          "persona": "qa",
+          "mode": "CHALLENGE",
+          "q": "Nếu API change làm sample code lỗi, làm sao biết trước user?"
+        },
+        {
+          "id": "DC-QA-EX-02",
+          "persona": "qa",
+          "mode": "EXPLORE",
+          "q": "Có cần preview branch deploy cho mỗi PR docs không?"
+        },
+        {
+          "id": "DC-QA-GU-02",
+          "persona": "qa",
+          "mode": "GUIDED",
+          "q": "Accessibility level: (a) WCAG AA, (b) AAA, (c) chỉ tự test, (d) audit ngoài?"
+        },
+        {
+          "id": "DC-DV-GU-01",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "Engine: (a) Nextra, (b) Docusaurus, (c) Mintlify, (d) custom Next.js?"
+        },
+        {
+          "id": "DC-DV-EX-01",
+          "persona": "developer",
+          "mode": "EXPLORE",
+          "q": "API reference: viết tay MDX hay generate từ OpenAPI/TypeDoc?"
+        },
+        {
+          "id": "DC-DV-CH-01",
+          "persona": "developer",
+          "mode": "CHALLENGE",
+          "q": "Tại sao KHÔNG dùng GitBook hay Notion publish?"
+        },
+        {
+          "id": "DC-DV-GU-02",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "Code editor in-browser: (a) StackBlitz, (b) CodeSandbox, (c) plain code block, (d) không?"
+        },
+        {
+          "id": "DC-DV-EX-02",
+          "persona": "developer",
+          "mode": "EXPLORE",
+          "q": "Diagram: Mermaid in MDX, hay PNG export?"
+        },
+        {
+          "id": "DC-DV-CH-02",
+          "persona": "developer",
+          "mode": "CHALLENGE",
+          "q": "Nếu lib version update breaking, sample cũ có notice 'this is for v1' không?"
+        },
+        {
+          "id": "DC-OP-EX-01",
+          "persona": "operator",
+          "mode": "EXPLORE",
+          "q": "Domain: docs.example.com hay /docs subpath?"
+        },
+        {
+          "id": "DC-OP-GU-01",
+          "persona": "operator",
+          "mode": "GUIDED",
+          "q": "CDN: (a) Vercel, (b) Cloudflare, (c) Netlify, (d) S3 + CloudFront?"
+        },
+        {
+          "id": "DC-OP-CH-01",
+          "persona": "operator",
+          "mode": "CHALLENGE",
+          "q": "Khi search index miss, fallback (Google site:) hay 'try X' hint?"
+        },
+        {
+          "id": "DC-OP-EX-02",
+          "persona": "operator",
+          "mode": "EXPLORE",
+          "q": "Analytics: GA4, Plausible, hay không track docs?"
+        },
+        {
+          "id": "DC-OP-GU-02",
+          "persona": "operator",
+          "mode": "GUIDED",
+          "q": "Edit-link: (a) GitHub edit-on-this-page, (b) GitLab, (c) không, (d) feedback widget?"
+        },
+        {
+          "id": "DC-OP-CH-02",
+          "persona": "operator",
+          "mode": "CHALLENGE",
+          "q": "Khi docs site outage, in-app help của bạn fallback thế nào?"
+        }
+      ]
+    },
+    "portfolio": {
+      "expected_min": 25,
+      "actual": 25,
+      "missing_cells": [],
+      "questions": [
+        {
+          "id": "PO-EU-EX-01",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "Khách hàng tiềm năng (recruiter, agency, founder) đến đây làm gì trong 1 phút đầu?"
+        },
+        {
+          "id": "PO-EU-GU-01",
+          "persona": "end_user",
+          "mode": "GUIDED",
+          "q": "Section quan trọng nhất: (a) projects, (b) about/bio, (c) experience, (d) blog?"
+        },
+        {
+          "id": "PO-EU-CH-01",
+          "persona": "end_user",
+          "mode": "CHALLENGE",
+          "q": "Nếu portfolio có 50 projects, bạn ẩn bớt hay hiện tất?"
+        },
+        {
+          "id": "PO-EU-EX-02",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "CV download có cần thiết hay nội dung trang đã đủ?"
+        },
+        {
+          "id": "PO-EU-GU-02",
+          "persona": "end_user",
+          "mode": "GUIDED",
+          "q": "Contact: (a) email mailto, (b) form, (c) Calendly, (d) cả ba?"
+        },
+        {
+          "id": "PO-BA-EX-01",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "Mục tiêu portfolio: tìm việc, freelance leads, brand cá nhân, recruiting candidate?"
+        },
+        {
+          "id": "PO-BA-GU-01",
+          "persona": "ba",
+          "mode": "GUIDED",
+          "q": "Định vị: (a) generalist, (b) niche-specialist, (c) consultant, (d) studio (we = team)?"
+        },
+        {
+          "id": "PO-BA-CH-01",
+          "persona": "ba",
+          "mode": "CHALLENGE",
+          "q": "Có một dự án nào tự hào nhưng đã NDA — bạn show lên thế nào?"
+        },
+        {
+          "id": "PO-BA-EX-02",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "Có cần testimonials từ client cũ không? Đã thu được bao nhiêu?"
+        },
+        {
+          "id": "PO-BA-GU-02",
+          "persona": "ba",
+          "mode": "GUIDED",
+          "q": "Pricing/rate: (a) ẩn, (b) 'starts from', (c) hourly rate, (d) inquire?"
+        },
+        {
+          "id": "PO-QA-CH-01",
+          "persona": "qa",
+          "mode": "CHALLENGE",
+          "q": "Khi có 100 visit cùng lúc (HN frontpage), site có sống được không?"
+        },
+        {
+          "id": "PO-QA-EX-01",
+          "persona": "qa",
+          "mode": "EXPLORE",
+          "q": "Image gallery — load eagerly hay lazy + skeleton?"
+        },
+        {
+          "id": "PO-QA-GU-01",
+          "persona": "qa",
+          "mode": "GUIDED",
+          "q": "Animation level: (a) heavy (Lottie), (b) subtle (Framer), (c) chỉ CSS, (d) tắt cho prefers-reduced?"
+        },
+        {
+          "id": "PO-QA-CH-02",
+          "persona": "qa",
+          "mode": "CHALLENGE",
+          "q": "Nếu visitor dùng VPN khác múi giờ, ngày 'updated' có hiển thị đúng không?"
+        },
+        {
+          "id": "PO-QA-EX-02",
+          "persona": "qa",
+          "mode": "EXPLORE",
+          "q": "Test responsive ở những breakpoint nào? Tablet portrait?"
+        },
+        {
+          "id": "PO-DV-GU-01",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "Stack: (a) Next.js + MDX, (b) Astro, (c) Eleventy, (d) plain HTML?"
+        },
+        {
+          "id": "PO-DV-EX-01",
+          "persona": "developer",
+          "mode": "EXPLORE",
+          "q": "Project content — MDX file-system, hay CMS (Sanity/Contentful)?"
+        },
+        {
+          "id": "PO-DV-CH-01",
+          "persona": "developer",
+          "mode": "CHALLENGE",
+          "q": "Tại sao KHÔNG dùng Read.cv / Bento và phải tự build?"
+        },
+        {
+          "id": "PO-DV-GU-02",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "Image format: (a) AVIF first, (b) WebP, (c) JPEG, (d) tất cả qua next/image?"
+        },
+        {
+          "id": "PO-DV-EX-02",
+          "persona": "developer",
+          "mode": "EXPLORE",
+          "q": "Có cần video reel hay only screenshots?"
+        },
+        {
+          "id": "PO-OP-GU-01",
+          "persona": "operator",
+          "mode": "GUIDED",
+          "q": "Hosting: (a) Vercel, (b) GitHub Pages, (c) Netlify, (d) self-host?"
+        },
+        {
+          "id": "PO-OP-EX-01",
+          "persona": "operator",
+          "mode": "EXPLORE",
+          "q": "Domain custom + email setup ở đâu?"
+        },
+        {
+          "id": "PO-OP-CH-01",
+          "persona": "operator",
+          "mode": "CHALLENGE",
+          "q": "Khi muốn refresh nội dung 1 dự án cũ, edit ở đâu nhanh nhất (mobile)?"
+        },
+        {
+          "id": "PO-OP-GU-02",
+          "persona": "operator",
+          "mode": "GUIDED",
+          "q": "Analytics: (a) Plausible, (b) Umami, (c) GA4, (d) không track?"
+        },
+        {
+          "id": "PO-OP-CH-02",
+          "persona": "operator",
+          "mode": "CHALLENGE",
+          "q": "Nếu domain expire vì quên gia hạn, có alert tự động trước 30 ngày không?"
+        }
+      ]
+    },
+    "ecommerce": {
+      "expected_min": 40,
+      "actual": 40,
+      "missing_cells": [],
+      "questions": [
+        {
+          "id": "EC-EU-EX-01",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "Persona shopper chính là ai (Gen Z / Millennial / hộ gia đình / B2B)?"
+        },
+        {
+          "id": "EC-EU-EX-02",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "Ngân sách trung bình mỗi đơn (AOV target) là bao nhiêu?"
+        },
+        {
+          "id": "EC-EU-GU-01",
+          "persona": "end_user",
+          "mode": "GUIDED",
+          "q": "Checkout: (a) guest checkout, (b) bắt buộc account, (c) cả hai, (d) social login only?"
+        },
+        {
+          "id": "EC-EU-CH-01",
+          "persona": "end_user",
+          "mode": "CHALLENGE",
+          "q": "Nếu user bỏ giỏ hàng, bạn remind email sau bao lâu? Nội dung gì?"
+        },
+        {
+          "id": "EC-EU-GU-02",
+          "persona": "end_user",
+          "mode": "GUIDED",
+          "q": "Wishlist: (a) yes, (b) no, (c) only logged-in, (d) cookie-based?"
+        },
+        {
+          "id": "EC-EU-EX-03",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "Có cần size guide / tư vấn AI cho fashion không?"
+        },
+        {
+          "id": "EC-EU-CH-02",
+          "persona": "end_user",
+          "mode": "CHALLENGE",
+          "q": "Khi sản phẩm sold-out, hiển thị 'pre-order' hay ẩn hoàn toàn?"
+        },
+        {
+          "id": "EC-EU-GU-03",
+          "persona": "end_user",
+          "mode": "GUIDED",
+          "q": "Đánh giá: (a) chỉ buyer verified, (b) bất kỳ ai, (c) tắt review, (d) chỉ rating sao?"
+        },
+        {
+          "id": "EC-BA-EX-01",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "Catalog size: < 100, 100-1k, 1k-10k, > 10k SKU? Ảnh hưởng đến search/IA."
+        },
+        {
+          "id": "EC-BA-GU-01",
+          "persona": "ba",
+          "mode": "GUIDED",
+          "q": "Pricing: (a) fixed, (b) tier theo volume, (c) dynamic (flash sale), (d) negotiable B2B?"
+        },
+        {
+          "id": "EC-BA-EX-02",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "Tax & shipping zones — VN nội thành / liên tỉnh / quốc tế?"
+        },
+        {
+          "id": "EC-BA-CH-01",
+          "persona": "ba",
+          "mode": "CHALLENGE",
+          "q": "Nếu margin từ chi phí ship vượt sản phẩm, bạn vẫn nhận đơn nhỏ?"
+        },
+        {
+          "id": "EC-BA-GU-02",
+          "persona": "ba",
+          "mode": "GUIDED",
+          "q": "Khuyến mãi: (a) coupon code, (b) auto-discount, (c) bundle, (d) tất cả?"
+        },
+        {
+          "id": "EC-BA-EX-03",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "Loyalty/points program — có cần ngay lúc launch không?"
+        },
+        {
+          "id": "EC-BA-CH-02",
+          "persona": "ba",
+          "mode": "CHALLENGE",
+          "q": "Có cần marketplace logic (multi-vendor) hay single-merchant?"
+        },
+        {
+          "id": "EC-BA-GU-03",
+          "persona": "ba",
+          "mode": "GUIDED",
+          "q": "Trả hàng: (a) 7 ngày free, (b) 30 ngày with restocking fee, (c) không nhận, (d) chỉ defect?"
+        },
+        {
+          "id": "EC-QA-CH-01",
+          "persona": "qa",
+          "mode": "CHALLENGE",
+          "q": "Thanh toán fail giữa lúc trừ kho — race condition lock thế nào?"
+        },
+        {
+          "id": "EC-QA-EX-01",
+          "persona": "qa",
+          "mode": "EXPLORE",
+          "q": "Test integration với VNPay/MoMo/ZaloPay sandbox bao nhiêu trường hợp?"
+        },
+        {
+          "id": "EC-QA-GU-01",
+          "persona": "qa",
+          "mode": "GUIDED",
+          "q": "Inventory: (a) realtime decrement, (b) reserved khi vào checkout, (c) chỉ check at-payment, (d) hybrid?"
+        },
+        {
+          "id": "EC-QA-CH-02",
+          "persona": "qa",
+          "mode": "CHALLENGE",
+          "q": "Khi 1000 khách flash-sale cùng giây, tránh overselling thế nào?"
+        },
+        {
+          "id": "EC-QA-EX-02",
+          "persona": "qa",
+          "mode": "EXPLORE",
+          "q": "Search relevance — Algolia / Meilisearch / Postgres FTS?"
+        },
+        {
+          "id": "EC-QA-GU-02",
+          "persona": "qa",
+          "mode": "GUIDED",
+          "q": "Locale ngôn ngữ: (a) chỉ tiếng Việt, (b) Việt + Anh, (c) Việt + Anh + Trung, (d) auto từ IP?"
+        },
+        {
+          "id": "EC-QA-CH-03",
+          "persona": "qa",
+          "mode": "CHALLENGE",
+          "q": "Currency rate cập nhật từ đâu, lệch tỷ giá > 5% thì làm gì?"
+        },
+        {
+          "id": "EC-QA-EX-03",
+          "persona": "qa",
+          "mode": "EXPLORE",
+          "q": "Test analytics conversion funnel — bao nhiêu bước phải instrumented?"
+        },
+        {
+          "id": "EC-DV-GU-01",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "Backend: (a) Next.js full-stack, (b) Medusa.js, (c) Saleor, (d) Shopify Hydrogen?"
+        },
+        {
+          "id": "EC-DV-GU-02",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "Payment: (a) Stripe, (b) Stripe + VNPay/MoMo, (c) chỉ VN gateway, (d) crypto?"
+        },
+        {
+          "id": "EC-DV-EX-01",
+          "persona": "developer",
+          "mode": "EXPLORE",
+          "q": "DB: Postgres? Inventory cần Redis layer cache?"
+        },
+        {
+          "id": "EC-DV-CH-01",
+          "persona": "developer",
+          "mode": "CHALLENGE",
+          "q": "Tại sao KHÔNG dùng Shopify off-the-shelf?"
+        },
+        {
+          "id": "EC-DV-GU-03",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "CDN cho ảnh: (a) Cloudinary, (b) Imgix, (c) S3+CloudFront, (d) next/image only?"
+        },
+        {
+          "id": "EC-DV-EX-02",
+          "persona": "developer",
+          "mode": "EXPLORE",
+          "q": "Recommendation engine — tự build, dùng API của Algolia, hay không có?"
+        },
+        {
+          "id": "EC-DV-CH-02",
+          "persona": "developer",
+          "mode": "CHALLENGE",
+          "q": "Migration data từ Shopee/Lazada — script nào, mất bao lâu?"
+        },
+        {
+          "id": "EC-DV-GU-04",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "Email transactional: (a) Resend, (b) Postmark, (c) Sendgrid, (d) AWS SES?"
+        },
+        {
+          "id": "EC-OP-EX-01",
+          "persona": "operator",
+          "mode": "EXPLORE",
+          "q": "Order fulfillment: tự kho, 3PL (GHN/GHTK), hay dropship?"
+        },
+        {
+          "id": "EC-OP-GU-01",
+          "persona": "operator",
+          "mode": "GUIDED",
+          "q": "Tracking: (a) gateway shipper API, (b) sheet thủ công, (c) custom dashboard, (d) third-party?"
+        },
+        {
+          "id": "EC-OP-CH-01",
+          "persona": "operator",
+          "mode": "CHALLENGE",
+          "q": "Khi ngân hàng VN cuối tháng chậm, payment timeout xử lý thế nào?"
+        },
+        {
+          "id": "EC-OP-EX-02",
+          "persona": "operator",
+          "mode": "EXPLORE",
+          "q": "Hóa đơn điện tử (e-invoice VN) tích hợp với provider nào?"
+        },
+        {
+          "id": "EC-OP-GU-02",
+          "persona": "operator",
+          "mode": "GUIDED",
+          "q": "Báo cáo doanh thu: (a) realtime dashboard, (b) daily email, (c) export hằng tuần, (d) BI tool?"
+        },
+        {
+          "id": "EC-OP-CH-02",
+          "persona": "operator",
+          "mode": "CHALLENGE",
+          "q": "Khi flash-sale làm CDN bill spike 10x, alert/cap thế nào?"
+        },
+        {
+          "id": "EC-OP-EX-03",
+          "persona": "operator",
+          "mode": "EXPLORE",
+          "q": "Customer support tool: Crisp, Tawk, Zendesk, hay Zalo OA?"
+        },
+        {
+          "id": "EC-OP-GU-03",
+          "persona": "operator",
+          "mode": "GUIDED",
+          "q": "Refund flow: (a) auto, (b) manager approve, (c) chỉ store credit, (d) tổ hợp?"
+        }
+      ]
+    },
+    "enterprise-module": {
+      "expected_min": 45,
+      "actual": 45,
+      "missing_cells": [],
+      "questions": [
+        {
+          "id": "EM-EU-EX-01",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "Module này phục vụ user role nào trong hệ thống cũ (admin/manager/agent/customer)?"
+        },
+        {
+          "id": "EM-EU-EX-02",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "Trước đây họ làm thao tác này bằng cách nào (Excel, công cụ khác, không có)?"
+        },
+        {
+          "id": "EM-EU-GU-01",
+          "persona": "end_user",
+          "mode": "GUIDED",
+          "q": "Frequency thao tác: (a) hằng ngày, (b) hằng tuần, (c) hằng tháng, (d) ad-hoc?"
+        },
+        {
+          "id": "EM-EU-CH-01",
+          "persona": "end_user",
+          "mode": "CHALLENGE",
+          "q": "Nếu module mới chậm hơn 30% so với cách cũ, họ có chấp nhận không?"
+        },
+        {
+          "id": "EM-EU-EX-03",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "Có user nhóm power-user cần shortcut keyboard không?"
+        },
+        {
+          "id": "EM-EU-GU-02",
+          "persona": "end_user",
+          "mode": "GUIDED",
+          "q": "UI placement: (a) left nav mới, (b) tab trong page hiện có, (c) modal trigger, (d) right rail?"
+        },
+        {
+          "id": "EM-EU-CH-02",
+          "persona": "end_user",
+          "mode": "CHALLENGE",
+          "q": "Có user nào KHÔNG nên thấy module này (phân quyền chặt)?"
+        },
+        {
+          "id": "EM-EU-EX-04",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "Có cần hỗ trợ multi-tab open song song module này không?"
+        },
+        {
+          "id": "EM-EU-GU-03",
+          "persona": "end_user",
+          "mode": "GUIDED",
+          "q": "Mobile: (a) full responsive, (b) view-only, (c) PWA, (d) chỉ desktop?"
+        },
+        {
+          "id": "EM-BA-EX-01",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "Mục tiêu kinh doanh của module: giảm thời gian X xuống Y, tăng revenue Z, hay compliance?"
+        },
+        {
+          "id": "EM-BA-EX-02",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "Stakeholder approval: ai ký quyết định scope (PM, GM, Legal)?"
+        },
+        {
+          "id": "EM-BA-GU-01",
+          "persona": "ba",
+          "mode": "GUIDED",
+          "q": "ROI window: (a) ROI trong 3 tháng, (b) 6 tháng, (c) 12 tháng, (d) chiến lược dài hạn?"
+        },
+        {
+          "id": "EM-BA-CH-01",
+          "persona": "ba",
+          "mode": "CHALLENGE",
+          "q": "Có module/tools cũ nào sẽ bị thay thế? Migration timeline?"
+        },
+        {
+          "id": "EM-BA-EX-03",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "Phân tích chi phí: dev hours, infra delta, training cost?"
+        },
+        {
+          "id": "EM-BA-GU-02",
+          "persona": "ba",
+          "mode": "GUIDED",
+          "q": "Phasing: (a) big-bang launch, (b) pilot 1 team, (c) feature flag rollout, (d) blue-green?"
+        },
+        {
+          "id": "EM-BA-CH-02",
+          "persona": "ba",
+          "mode": "CHALLENGE",
+          "q": "Nếu launch fail, fallback tới hệ cũ có khả thi không?"
+        },
+        {
+          "id": "EM-BA-EX-04",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "Có yêu cầu compliance pháp lý đặc biệt (PCI/HIPAA/PDPL)?"
+        },
+        {
+          "id": "EM-BA-GU-03",
+          "persona": "ba",
+          "mode": "GUIDED",
+          "q": "Training: (a) docs only, (b) workshop, (c) video, (d) hands-on session?"
+        },
+        {
+          "id": "EM-QA-EX-01",
+          "persona": "qa",
+          "mode": "EXPLORE",
+          "q": "Critical-path test scenarios — bao nhiêu, take-down acceptance là gì?"
+        },
+        {
+          "id": "EM-QA-GU-01",
+          "persona": "qa",
+          "mode": "GUIDED",
+          "q": "Test data: (a) prod-snapshot scrubbed, (b) generated, (c) manual seed, (d) shared sandbox?"
+        },
+        {
+          "id": "EM-QA-CH-01",
+          "persona": "qa",
+          "mode": "CHALLENGE",
+          "q": "Khi module fail, có ảnh hưởng đến module khác (loose coupling)?"
+        },
+        {
+          "id": "EM-QA-EX-02",
+          "persona": "qa",
+          "mode": "EXPLORE",
+          "q": "Có cần load-test 10x current peak không? Tools nào?"
+        },
+        {
+          "id": "EM-QA-CH-02",
+          "persona": "qa",
+          "mode": "CHALLENGE",
+          "q": "Migration data legacy: data dirty, plan để clean / map / drop record không hợp lệ?"
+        },
+        {
+          "id": "EM-QA-GU-02",
+          "persona": "qa",
+          "mode": "GUIDED",
+          "q": "Regression: (a) full suite chạy mỗi PR, (b) smoke + nightly full, (c) nightly only, (d) on-demand?"
+        },
+        {
+          "id": "EM-QA-EX-03",
+          "persona": "qa",
+          "mode": "EXPLORE",
+          "q": "Audit trail của module yêu cầu giữ bao lâu?"
+        },
+        {
+          "id": "EM-QA-CH-03",
+          "persona": "qa",
+          "mode": "CHALLENGE",
+          "q": "Khi user dùng power-shortcut, security check vẫn run hay shortcut vòng qua?"
+        },
+        {
+          "id": "EM-QA-GU-03",
+          "persona": "qa",
+          "mode": "GUIDED",
+          "q": "Permission matrix: (a) reuse RBAC hiện có, (b) thêm scope mới, (c) ABAC, (d) custom rule?"
+        },
+        {
+          "id": "EM-DV-GU-01",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "Stack: REUSE — không tạo framework/state mới. Confirm: (a) yes, (b) extension cần thảo luận, (c) deviation có lý do?"
+        },
+        {
+          "id": "EM-DV-EX-01",
+          "persona": "developer",
+          "mode": "EXPLORE",
+          "q": "Module API gắn vào endpoint nào? Versioning v1/v2?"
+        },
+        {
+          "id": "EM-DV-CH-01",
+          "persona": "developer",
+          "mode": "CHALLENGE",
+          "q": "Có cần tách micro-frontend hay vẫn monolith?"
+        },
+        {
+          "id": "EM-DV-GU-02",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "DB migration: (a) thêm column nullable, (b) bảng mới, (c) materialized view, (d) read-replica?"
+        },
+        {
+          "id": "EM-DV-EX-02",
+          "persona": "developer",
+          "mode": "EXPLORE",
+          "q": "Feature flag: launchdarkly, posthog, hay tự build?"
+        },
+        {
+          "id": "EM-DV-CH-02",
+          "persona": "developer",
+          "mode": "CHALLENGE",
+          "q": "Khi rollback DB schema, app cũ và mới cùng coexist trong N giờ — handle thế nào?"
+        },
+        {
+          "id": "EM-DV-GU-03",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "Test framework: reuse current (a) Jest, (b) Vitest, (c) Playwright e2e, (d) hỗn hợp?"
+        },
+        {
+          "id": "EM-DV-EX-03",
+          "persona": "developer",
+          "mode": "EXPLORE",
+          "q": "Code review approver: nội bộ team / cross-team / architect?"
+        },
+        {
+          "id": "EM-DV-CH-03",
+          "persona": "developer",
+          "mode": "CHALLENGE",
+          "q": "Nếu legacy code chỗ nào không có test, bạn refactor trước hay sau?"
+        },
+        {
+          "id": "EM-OP-EX-01",
+          "persona": "operator",
+          "mode": "EXPLORE",
+          "q": "Deployment window: business hour, off-hour, weekend?"
+        },
+        {
+          "id": "EM-OP-GU-01",
+          "persona": "operator",
+          "mode": "GUIDED",
+          "q": "Rollout strategy: (a) blue-green, (b) canary 5/25/100, (c) feature flag, (d) shadow traffic?"
+        },
+        {
+          "id": "EM-OP-CH-01",
+          "persona": "operator",
+          "mode": "CHALLENGE",
+          "q": "Khi module mới gây alert spike (false positive), tách noise thế nào?"
+        },
+        {
+          "id": "EM-OP-EX-02",
+          "persona": "operator",
+          "mode": "EXPLORE",
+          "q": "Cost tracking: tag tài nguyên ra sao để biết module này tiêu bao nhiêu?"
+        },
+        {
+          "id": "EM-OP-GU-02",
+          "persona": "operator",
+          "mode": "GUIDED",
+          "q": "Logging level: (a) info default, (b) debug for first 7d, (c) chỉ error, (d) structured + sampling?"
+        },
+        {
+          "id": "EM-OP-CH-02",
+          "persona": "operator",
+          "mode": "CHALLENGE",
+          "q": "Khi data mạnh sensitive đi qua module mới, log redact đã đủ chưa?"
+        },
+        {
+          "id": "EM-OP-EX-03",
+          "persona": "operator",
+          "mode": "EXPLORE",
+          "q": "Backup/DR: module có data riêng không? RPO/RTO?"
+        },
+        {
+          "id": "EM-OP-GU-03",
+          "persona": "operator",
+          "mode": "GUIDED",
+          "q": "Health check endpoint: (a) /healthz, (b) /readyz + /livez, (c) nội bộ chỉ, (d) public?"
+        },
+        {
+          "id": "EM-OP-CH-03",
+          "persona": "operator",
+          "mode": "CHALLENGE",
+          "q": "Khi vendor third-party (gateway/email) downgrade, module degrade ra sao?"
+        }
+      ]
+    },
+    "custom": {
+      "expected_min": 15,
+      "actual": 16,
+      "missing_cells": [
+        "end_user/GUIDED"
+      ],
+      "questions": [
+        {
+          "id": "CU-EU-EX-01",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "Mô tả 1 câu duy nhất: dự án này GIẢI QUYẾT vấn đề gì cho ai?"
+        },
+        {
+          "id": "CU-EU-EX-02",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "User chính làm gì trong tuần đầu tiên dùng sản phẩm?"
+        },
+        {
+          "id": "CU-EU-CH-01",
+          "persona": "end_user",
+          "mode": "CHALLENGE",
+          "q": "Nếu chỉ được giữ 1 tính năng và bỏ tất cả còn lại, đó là gì?"
+        },
+        {
+          "id": "CU-BA-EX-01",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "Mục tiêu thành công sau 90 ngày là gì? Đo bằng metric nào?"
+        },
+        {
+          "id": "CU-BA-EX-02",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "Đối thủ cạnh tranh / lựa chọn thay thế của user hiện tại là gì?"
+        },
+        {
+          "id": "CU-BA-CH-01",
+          "persona": "ba",
+          "mode": "CHALLENGE",
+          "q": "Có scope/feature nào CỐ Ý không hỗ trợ (non-goal) để giữ tập trung?"
+        },
+        {
+          "id": "CU-BA-GU-01",
+          "persona": "ba",
+          "mode": "GUIDED",
+          "q": "Mô hình tài chính: (a) free, (b) one-time purchase, (c) subscription, (d) usage-based, (e) chưa biết?"
+        },
+        {
+          "id": "CU-QA-EX-01",
+          "persona": "qa",
+          "mode": "EXPLORE",
+          "q": "Định nghĩa 'sản phẩm hoạt động đúng' — happy path là gì, edge cases gì?"
+        },
+        {
+          "id": "CU-QA-CH-01",
+          "persona": "qa",
+          "mode": "CHALLENGE",
+          "q": "Nếu data quan trọng bị xóa nhầm, có rollback / audit không?"
+        },
+        {
+          "id": "CU-QA-GU-01",
+          "persona": "qa",
+          "mode": "GUIDED",
+          "q": "Mức compliance cần: (a) không yêu cầu, (b) GDPR, (c) GDPR + VN PDPL, (d) PCI/HIPAA?"
+        },
+        {
+          "id": "CU-DV-EX-01",
+          "persona": "developer",
+          "mode": "EXPLORE",
+          "q": "Có legacy system hoặc API bên ngoài bắt buộc tích hợp không?"
+        },
+        {
+          "id": "CU-DV-GU-01",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "Stack preference: (a) JS/TS full-stack, (b) Python, (c) Go, (d) chưa quyết — cần Vibecode đề xuất?"
+        },
+        {
+          "id": "CU-DV-CH-01",
+          "persona": "developer",
+          "mode": "CHALLENGE",
+          "q": "Tại sao KHÔNG mua off-the-shelf SaaS có sẵn?"
+        },
+        {
+          "id": "CU-OP-EX-01",
+          "persona": "operator",
+          "mode": "EXPLORE",
+          "q": "Quy mô user kỳ vọng tháng 1 / tháng 6 / năm 1?"
+        },
+        {
+          "id": "CU-OP-GU-01",
+          "persona": "operator",
+          "mode": "GUIDED",
+          "q": "Hosting preference: (a) cloud-managed (Vercel/Fly), (b) AWS, (c) on-prem, (d) chưa biết?"
+        },
+        {
+          "id": "CU-OP-CH-01",
+          "persona": "operator",
+          "mode": "CHALLENGE",
+          "q": "Khi sản phẩm có 100x user dự kiến trong 1 tuần, plan scale là gì?"
+        }
+      ]
+    },
+    "api": {
+      "expected_min": 28,
+      "description": "",
+      "questions": [
+        {
+          "id": "A-EU-EX-01",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "Ai là consumer chính của API (frontend web, mobile app, bên thứ ba, batch job)?"
+        },
+        {
+          "id": "A-EU-GU-02",
+          "persona": "end_user",
+          "mode": "GUIDED",
+          "q": "Auth model: API key, OAuth2/JWT, session cookie, hay mTLS?"
+        },
+        {
+          "id": "A-EU-CH-03",
+          "persona": "end_user",
+          "mode": "CHALLENGE",
+          "q": "Nếu consumer khác team, họ có cần sandbox riêng hay dùng chung staging?"
+        },
+        {
+          "id": "A-EU-EX-04",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "Client nào là ưu tiên đầu tiên (curl/Postman, SDK tự generate, SDK custom)?"
+        },
+        {
+          "id": "A-EU-GU-05",
+          "persona": "end_user",
+          "mode": "GUIDED",
+          "q": "Ngôn ngữ lỗi trả về: English-only, VN-only, hay phụ thuộc Accept-Language?"
+        },
+        {
+          "id": "A-EU-CH-06",
+          "persona": "end_user",
+          "mode": "CHALLENGE",
+          "q": "Khi rate-limit bật, consumer biết còn bao nhiêu quota như thế nào?"
+        },
+        {
+          "id": "A-BA-EX-01",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "Domain object chính gồm những gì (todo, user, tag, comment, audit log)?"
+        },
+        {
+          "id": "A-BA-GU-02",
+          "persona": "ba",
+          "mode": "GUIDED",
+          "q": "Versioning: URL path (/v1), header (Accept), query, hay không versioning?"
+        },
+        {
+          "id": "A-BA-CH-03",
+          "persona": "ba",
+          "mode": "CHALLENGE",
+          "q": "Nếu schema thay đổi breaking, consumer được thông báo bao lâu trước?"
+        },
+        {
+          "id": "A-BA-EX-04",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "SLA target (uptime, P95 latency) là bao nhiêu và ai ký nhận?"
+        },
+        {
+          "id": "A-BA-GU-05",
+          "persona": "ba",
+          "mode": "GUIDED",
+          "q": "Pagination: cursor, offset, page+size, hay keyset?"
+        },
+        {
+          "id": "A-BA-CH-06",
+          "persona": "ba",
+          "mode": "CHALLENGE",
+          "q": "Nếu cần xoá user (GDPR), có cần giữ lịch sử todo của họ không?"
+        },
+        {
+          "id": "A-QA-EX-01",
+          "persona": "qa",
+          "mode": "EXPLORE",
+          "q": "Contract test có, nếu có thì là Pact, OpenAPI-spec-validator, hay custom?"
+        },
+        {
+          "id": "A-QA-GU-02",
+          "persona": "qa",
+          "mode": "GUIDED",
+          "q": "Integration test coverage muốn đạt bao nhiêu % cho happy path?"
+        },
+        {
+          "id": "A-QA-CH-03",
+          "persona": "qa",
+          "mode": "CHALLENGE",
+          "q": "Regression cho breaking change: ai phát hiện — contract test hay consumer fail?"
+        },
+        {
+          "id": "A-QA-EX-04",
+          "persona": "qa",
+          "mode": "EXPLORE",
+          "q": "Load test baseline (RPS, concurrent users, duration)?"
+        },
+        {
+          "id": "A-QA-GU-05",
+          "persona": "qa",
+          "mode": "GUIDED",
+          "q": "Edge-case: payload rỗng, field null, field thừa, UTF-8 emoji — đều cần test?"
+        },
+        {
+          "id": "A-QA-CH-06",
+          "persona": "qa",
+          "mode": "CHALLENGE",
+          "q": "Khi DB chậm, API có degrade gracefully (cache stale, 503) hay fail hard?"
+        },
+        {
+          "id": "A-DV-EX-01",
+          "persona": "developer",
+          "mode": "EXPLORE",
+          "q": "Framework chọn: FastAPI, Flask, Django REST, Express, Spring Boot?"
+        },
+        {
+          "id": "A-DV-GU-02",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "ORM vs raw SQL vs query builder — tiêu chí chọn?"
+        },
+        {
+          "id": "A-DV-CH-03",
+          "persona": "developer",
+          "mode": "CHALLENGE",
+          "q": "Khi endpoint cần join 5 bảng, refactor thành view, stored proc, hay giữ raw query?"
+        },
+        {
+          "id": "A-DV-EX-04",
+          "persona": "developer",
+          "mode": "EXPLORE",
+          "q": "Schema evolution: migration tool (alembic/prisma/sqitch) hay manual DDL?"
+        },
+        {
+          "id": "A-DV-GU-05",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "Webhook outgoing: retry policy, signature, dedup key?"
+        },
+        {
+          "id": "A-DV-CH-06",
+          "persona": "developer",
+          "mode": "CHALLENGE",
+          "q": "Nếu đoàn dev chưa viết async, sync-only có đủ cho 1k RPS không?"
+        },
+        {
+          "id": "A-OP-EX-01",
+          "persona": "operator",
+          "mode": "EXPLORE",
+          "q": "Deploy target: serverless (Lambda/Cloud Run), K8s, VM, PaaS (Vercel/Render)?"
+        },
+        {
+          "id": "A-OP-GU-02",
+          "persona": "operator",
+          "mode": "GUIDED",
+          "q": "Observability: structured log, metrics, tracing (3-pillar) hay chỉ log?"
+        },
+        {
+          "id": "A-OP-CH-03",
+          "persona": "operator",
+          "mode": "CHALLENGE",
+          "q": "Alerts: ai nhận pager khi 5xx rate > 1 %? Có runbook kèm theo không?"
+        },
+        {
+          "id": "A-OP-EX-04",
+          "persona": "operator",
+          "mode": "EXPLORE",
+          "q": "Secrets quản lý ở đâu (env var, vault, KMS, AWS Secrets Manager)?"
+        },
+        {
+          "id": "A-OP-GU-05",
+          "persona": "operator",
+          "mode": "GUIDED",
+          "q": "Backup policy: PITR, daily snapshot, replica read, hay không backup?"
+        },
+        {
+          "id": "A-OP-CH-06",
+          "persona": "operator",
+          "mode": "CHALLENGE",
+          "q": "Khi incident production, RCA timeline và post-mortem template có sẵn chưa?"
+        }
+      ]
+    },
+    "crm": {
+      "expected_min": 28,
+      "description": "",
+      "questions": [
+        {
+          "id": "C-EU-EX-01",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "Role chính sử dụng CRM: sales rep, manager, marketing, support, admin?"
+        },
+        {
+          "id": "C-EU-GU-02",
+          "persona": "end_user",
+          "mode": "GUIDED",
+          "q": "Pain point hiện tại: data scattered, duplicate lead, không có 360 view?"
+        },
+        {
+          "id": "C-EU-CH-03",
+          "persona": "end_user",
+          "mode": "CHALLENGE",
+          "q": "Nếu một deal có 2 sales rep đang theo, ai chịu trách nhiệm chính?"
+        },
+        {
+          "id": "C-EU-EX-04",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "Pipeline stages (lead → qualified → proposal → won/lost) có chuẩn hoá chưa?"
+        },
+        {
+          "id": "C-EU-GU-05",
+          "persona": "end_user",
+          "mode": "GUIDED",
+          "q": "Activity log cần track: call, email, meeting, task, note, custom?"
+        },
+        {
+          "id": "C-EU-CH-06",
+          "persona": "end_user",
+          "mode": "CHALLENGE",
+          "q": "Khi khách hàng bỏ deal 6 tháng rồi quay lại, CRM phục hồi ngữ cảnh thế nào?"
+        },
+        {
+          "id": "C-BA-EX-01",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "Data model: contact, company, deal, activity, product — có thêm custom object?"
+        },
+        {
+          "id": "C-BA-GU-02",
+          "persona": "ba",
+          "mode": "GUIDED",
+          "q": "Reporting bắt buộc: pipeline forecast, conversion rate, activity leaderboard?"
+        },
+        {
+          "id": "C-BA-CH-03",
+          "persona": "ba",
+          "mode": "CHALLENGE",
+          "q": "Nếu 2 contact cùng email nhưng khác công ty, merge hay giữ riêng?"
+        },
+        {
+          "id": "C-BA-EX-04",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "Tích hợp: Gmail, Outlook, Zalo, calendar, marketing automation, phone?"
+        },
+        {
+          "id": "C-BA-GU-05",
+          "persona": "ba",
+          "mode": "GUIDED",
+          "q": "Multi-tenant: 1 instance / team hay 1 instance / company?"
+        },
+        {
+          "id": "C-BA-CH-06",
+          "persona": "ba",
+          "mode": "CHALLENGE",
+          "q": "GDPR / PDPA: right to erase áp lên contact có deal đóng — xoá hay anonymise?"
+        },
+        {
+          "id": "C-QA-EX-01",
+          "persona": "qa",
+          "mode": "EXPLORE",
+          "q": "Test data: sinh fake qua faker, import thật, hay snapshot production?"
+        },
+        {
+          "id": "C-QA-GU-02",
+          "persona": "qa",
+          "mode": "GUIDED",
+          "q": "Permission matrix test: role × action × record-ownership đủ chưa?"
+        },
+        {
+          "id": "C-QA-CH-03",
+          "persona": "qa",
+          "mode": "CHALLENGE",
+          "q": "Data migration từ spreadsheet/legacy CRM: rollback plan nếu mapping sai?"
+        },
+        {
+          "id": "C-QA-EX-04",
+          "persona": "qa",
+          "mode": "EXPLORE",
+          "q": "E2E test cho pipeline flow: lead → deal → close dùng Playwright hay Cypress?"
+        },
+        {
+          "id": "C-QA-GU-05",
+          "persona": "qa",
+          "mode": "GUIDED",
+          "q": "Performance test: 100k contact, 1M activity — hệ thống còn truy vấn <500ms?"
+        },
+        {
+          "id": "C-QA-CH-06",
+          "persona": "qa",
+          "mode": "CHALLENGE",
+          "q": "Khi sales rep nhập data sai, audit log có giúp rollback được không?"
+        },
+        {
+          "id": "C-DV-EX-01",
+          "persona": "developer",
+          "mode": "EXPLORE",
+          "q": "Framework backend: Node/Express, Django, Rails, Spring, Go-chi?"
+        },
+        {
+          "id": "C-DV-GU-02",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "Search: Postgres full-text, Elastic, Typesense, Algolia — chọn tiêu chí nào?"
+        },
+        {
+          "id": "C-DV-CH-03",
+          "persona": "developer",
+          "mode": "CHALLENGE",
+          "q": "Custom field cần query được: EAV pattern, JSONB column, hay schema change?"
+        },
+        {
+          "id": "C-DV-EX-04",
+          "persona": "developer",
+          "mode": "EXPLORE",
+          "q": "Webhook outbound cho partner systems: design retry + dedup + signature?"
+        },
+        {
+          "id": "C-DV-GU-05",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "Bulk import CSV: streaming parse, batch insert, conflict resolution ?"
+        },
+        {
+          "id": "C-DV-CH-06",
+          "persona": "developer",
+          "mode": "CHALLENGE",
+          "q": "Nếu user muốn offline edit (mobile), conflict resolution strategy là gì?"
+        },
+        {
+          "id": "C-OP-EX-01",
+          "persona": "operator",
+          "mode": "EXPLORE",
+          "q": "Deployment: SaaS multi-tenant, self-hosted, hybrid?"
+        },
+        {
+          "id": "C-OP-GU-02",
+          "persona": "operator",
+          "mode": "GUIDED",
+          "q": "Backup: full daily, incremental hourly, point-in-time recovery?"
+        },
+        {
+          "id": "C-OP-CH-03",
+          "persona": "operator",
+          "mode": "CHALLENGE",
+          "q": "User provisioning: SSO (SAML/OIDC), SCIM auto-provision, hay manual?"
+        },
+        {
+          "id": "C-OP-EX-04",
+          "persona": "operator",
+          "mode": "EXPLORE",
+          "q": "Monitoring: business metrics (DAU, deal created) ngoài tech metric?"
+        },
+        {
+          "id": "C-OP-GU-05",
+          "persona": "operator",
+          "mode": "GUIDED",
+          "q": "Compliance: GDPR, PDPA, SOC2, HIPAA — scope nào bắt buộc?"
+        },
+        {
+          "id": "C-OP-CH-06",
+          "persona": "operator",
+          "mode": "CHALLENGE",
+          "q": "Nếu tenant yêu cầu data residency VN, data center / encryption key quản ở đâu?"
+        }
+      ]
+    },
+    "mobile": {
+      "expected_min": 28,
+      "description": "",
+      "questions": [
+        {
+          "id": "M-EU-EX-01",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "Platform ưu tiên: iOS, Android, hay cả hai cùng lúc?"
+        },
+        {
+          "id": "M-EU-GU-02",
+          "persona": "end_user",
+          "mode": "GUIDED",
+          "q": "Offline mode: full offline, read-only offline, hay chỉ cache thumbnail?"
+        },
+        {
+          "id": "M-EU-CH-03",
+          "persona": "end_user",
+          "mode": "CHALLENGE",
+          "q": "Nếu user không cho push notification permission, onboarding còn giá trị không?"
+        },
+        {
+          "id": "M-EU-EX-04",
+          "persona": "end_user",
+          "mode": "EXPLORE",
+          "q": "Accessibility: VoiceOver/TalkBack, dynamic type, contrast AAA?"
+        },
+        {
+          "id": "M-EU-GU-05",
+          "persona": "end_user",
+          "mode": "GUIDED",
+          "q": "First-open experience: tutorial overlay, empty state, sample data?"
+        },
+        {
+          "id": "M-EU-CH-06",
+          "persona": "end_user",
+          "mode": "CHALLENGE",
+          "q": "Khi user rotate device hay lock màn hình giữa form, data giữ hay mất?"
+        },
+        {
+          "id": "M-BA-EX-01",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "Release cadence: hot-fix hàng ngày, 2-tuần sprint, hay theo store review?"
+        },
+        {
+          "id": "M-BA-GU-02",
+          "persona": "ba",
+          "mode": "GUIDED",
+          "q": "Monetization: free, one-time, subscription, IAP, ads — chọn model nào?"
+        },
+        {
+          "id": "M-BA-CH-03",
+          "persona": "ba",
+          "mode": "CHALLENGE",
+          "q": "Nếu App Store policy thay đổi (payment, tracking), plan migration thế nào?"
+        },
+        {
+          "id": "M-BA-EX-04",
+          "persona": "ba",
+          "mode": "EXPLORE",
+          "q": "Localization scope: chỉ VN, VN+EN, hay nhiều locale hơn?"
+        },
+        {
+          "id": "M-BA-GU-05",
+          "persona": "ba",
+          "mode": "GUIDED",
+          "q": "Analytics events bắt buộc cho PM: install, activate, d1/d7 retention, churn?"
+        },
+        {
+          "id": "M-BA-CH-06",
+          "persona": "ba",
+          "mode": "CHALLENGE",
+          "q": "Nếu store từ chối build (binary rejection), hạn ship bị ảnh hưởng bao nhiêu?"
+        },
+        {
+          "id": "M-QA-EX-01",
+          "persona": "qa",
+          "mode": "EXPLORE",
+          "q": "Device matrix: top 5 iOS + top 10 Android, emulator + real device?"
+        },
+        {
+          "id": "M-QA-GU-02",
+          "persona": "qa",
+          "mode": "GUIDED",
+          "q": "Network condition: wifi, 4G, 3G, offline, lossy — test coverage?"
+        },
+        {
+          "id": "M-QA-CH-03",
+          "persona": "qa",
+          "mode": "CHALLENGE",
+          "q": "Nếu user đang ở 3G vùng yếu, API timeout default 30s có hợp lý?"
+        },
+        {
+          "id": "M-QA-EX-04",
+          "persona": "qa",
+          "mode": "EXPLORE",
+          "q": "E2E framework: Detox, Maestro, Appium, XCUITest/Espresso?"
+        },
+        {
+          "id": "M-QA-GU-05",
+          "persona": "qa",
+          "mode": "GUIDED",
+          "q": "Screen-size / font-scale variations: snapshot test bao nhiêu breakpoint?"
+        },
+        {
+          "id": "M-QA-CH-06",
+          "persona": "qa",
+          "mode": "CHALLENGE",
+          "q": "Khi OS update lớn (iOS/Android major), ai phát hiện regression trước user?"
+        },
+        {
+          "id": "M-DV-EX-01",
+          "persona": "developer",
+          "mode": "EXPLORE",
+          "q": "Stack: React Native (Expo), Flutter, native Swift/Kotlin, hay Kotlin Multiplatform?"
+        },
+        {
+          "id": "M-DV-GU-02",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "State management: Redux, Zustand, Riverpod, BLoC, SwiftUI @Observable?"
+        },
+        {
+          "id": "M-DV-CH-03",
+          "persona": "developer",
+          "mode": "CHALLENGE",
+          "q": "Native module cần bridge: team có đủ skill Kotlin/Swift không?"
+        },
+        {
+          "id": "M-DV-EX-04",
+          "persona": "developer",
+          "mode": "EXPLORE",
+          "q": "Deep link strategy: universal link (iOS), app link (Android), schema URL fallback?"
+        },
+        {
+          "id": "M-DV-GU-05",
+          "persona": "developer",
+          "mode": "GUIDED",
+          "q": "Image / asset optimisation: WebP, lazy load, thumbnail prefetch?"
+        },
+        {
+          "id": "M-DV-CH-06",
+          "persona": "developer",
+          "mode": "CHALLENGE",
+          "q": "Khi app size vượt limit store (150 MB / 200 MB), split nhị phân hay download asset?"
+        },
+        {
+          "id": "M-OP-EX-01",
+          "persona": "operator",
+          "mode": "EXPLORE",
+          "q": "Crash reporting: Sentry, Firebase Crashlytics, Bugsnag?"
+        },
+        {
+          "id": "M-OP-GU-02",
+          "persona": "operator",
+          "mode": "GUIDED",
+          "q": "Feature flag: LaunchDarkly, Unleash, Firebase Remote Config, self-host?"
+        },
+        {
+          "id": "M-OP-CH-03",
+          "persona": "operator",
+          "mode": "CHALLENGE",
+          "q": "OTA update (CodePush/Expo Updates): rollout %, rollback trigger?"
+        },
+        {
+          "id": "M-OP-EX-04",
+          "persona": "operator",
+          "mode": "EXPLORE",
+          "q": "CI/CD: Fastlane lanes, EAS Build, Xcode Cloud, Bitrise?"
+        },
+        {
+          "id": "M-OP-GU-05",
+          "persona": "operator",
+          "mode": "GUIDED",
+          "q": "Code signing + provisioning: manual, match, ASC API?"
+        },
+        {
+          "id": "M-OP-CH-06",
+          "persona": "operator",
+          "mode": "CHALLENGE",
+          "q": "Privacy manifest (iOS 17+, Android Data Safety): ai maintain và ai audit?"
+        }
+      ]
+    }
+  }
+}

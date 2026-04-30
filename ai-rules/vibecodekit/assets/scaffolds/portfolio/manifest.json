@@ -1,0 +1,44 @@
+{
+  "name": "portfolio",
+  "description": "Personal portfolio: Hero + Work + Contact sections, Tailwind + Framer Motion (Pattern E)",
+  "stacks": {
+    "nextjs": {
+      "files": [
+        "package.json",
+        "README.md",
+        "app/page.tsx",
+        "app/layout.tsx",
+        "app/globals.css",
+        "components/Hero.tsx",
+        "components/Work.tsx",
+        "components/Contact.tsx",
+        "tailwind.config.ts",
+        "postcss.config.js",
+        "next.config.ts",
+        "vercel.json",
+        "tsconfig.json",
+        ".gitignore",
+        ".env.example"
+      ],
+      "post_install": [
+        "npm install",
+        "npm run dev"
+      ],
+      "success_criteria": [
+        "package.json exists",
+        "app/page.tsx exists",
+        "components/Hero.tsx exists",
+        "components/Work.tsx exists",
+        "components/Contact.tsx exists",
+        "package.json has 'next' in dependencies",
+        "package.json has 'framer-motion' in dependencies",
+        "tailwind.config.ts exists",
+        "next.config.ts exists",
+        "vercel.json exists",
+        "tsconfig.json exists",
+        ".gitignore exists",
+        ".env.example exists"
+      ]
+    }
+  }
+}

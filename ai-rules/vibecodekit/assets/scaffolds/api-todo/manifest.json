@@ -1,0 +1,28 @@
+{
+  "name": "api-todo",
+  "description": "Minimal FastAPI todo REST API with SQLite + pytest",
+  "stacks": {
+    "fastapi": {
+      "files": [
+        "pyproject.toml",
+        "README.md",
+        "app/main.py",
+        "tests/test_app.py",
+        ".gitignore",
+        ".env.example"
+      ],
+      "post_install": [
+        "pip install -e .",
+        "uvicorn app.main:app --reload"
+      ],
+      "success_criteria": [
+        "pyproject.toml exists",
+        "app/main.py exists",
+        "tests/test_app.py exists",
+        "pyproject.toml contains 'fastapi'",
+        ".gitignore exists",
+        ".env.example exists"
+      ]
+    }
+  }
+}

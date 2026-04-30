@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand: #0f172a;
+  --accent: #ef4444;
+}
+
+::selection {
+  background: var(--accent);
+  color: #ffffff;
+}

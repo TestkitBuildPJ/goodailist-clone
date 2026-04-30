@@ -1,0 +1,62 @@
+{
+  "name": "crm",
+  "description": "Customer relationship management — contacts CRUD",
+  "stacks": {
+    "nextjs": {
+      "files": [
+        "package.json",
+        "README.md",
+        "app/page.tsx",
+        "app/layout.tsx",
+        "app/contacts/page.tsx",
+        "tailwind.config.ts",
+        "postcss.config.js",
+        "app/globals.css",
+        "next.config.ts",
+        "vercel.json",
+        "tsconfig.json",
+        ".gitignore",
+        ".env.example"
+      ],
+      "post_install": [
+        "npm install",
+        "npm run dev"
+      ],
+      "success_criteria": [
+        "package.json exists",
+        "app/contacts/page.tsx exists",
+        "package.json has 'next' in dependencies",
+        "tailwind.config.ts exists",
+        "postcss.config.js exists",
+        "app/globals.css exists",
+        "package.json has 'tailwindcss' in devDependencies",
+        "next.config.ts exists",
+        "vercel.json exists",
+        "tsconfig.json exists",
+        ".gitignore exists",
+        ".env.example exists"
+      ]
+    },
+    "fastapi": {
+      "files": [
+        "pyproject.toml",
+        "README.md",
+        "app/main.py",
+        "app/models.py",
+        ".gitignore",
+        ".env.example"
+      ],
+      "post_install": [
+        "pip install -e .",
+        "uvicorn app.main:app --reload"
+      ],
+      "success_criteria": [
+        "pyproject.toml exists",
+        "app/main.py exists",
+        "pyproject.toml contains 'fastapi'",
+        ".gitignore exists",
+        ".env.example exists"
+      ]
+    }
+  }
+}

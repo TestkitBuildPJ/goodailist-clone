@@ -1,0 +1,18 @@
+# deps & build
+node_modules/
+.expo/
+dist/
+web-build/
+
+# env
+.env*.local
+.env
+
+# native
+ios/build/
+android/build/
+*.iml
+
+# OS / editor
+.DS_Store
+*.log

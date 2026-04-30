@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "name": "vibecode-mobile-app",
+    "slug": "vibecode-mobile-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": { "backgroundColor": "#ffffff" },
+    "ios": { "supportsTablet": true },
+    "android": {}
+  }
+}

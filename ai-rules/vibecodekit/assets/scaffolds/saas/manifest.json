@@ -1,0 +1,50 @@
+{
+  "name": "saas",
+  "description": "SaaS starter: Next.js + NextAuth + Prisma; auth/dashboard layout split (Pattern B)",
+  "stacks": {
+    "nextjs": {
+      "files": [
+        "package.json",
+        "README.md",
+        "app/page.tsx",
+        "app/layout.tsx",
+        "app/globals.css",
+        "app/auth/login/page.tsx",
+        "app/dashboard/page.tsx",
+        "app/api/auth/[...nextauth]/route.ts",
+        "lib/auth.ts",
+        "prisma/schema.prisma",
+        "tailwind.config.ts",
+        "postcss.config.js",
+        "next.config.ts",
+        "vercel.json",
+        "tsconfig.json",
+        ".gitignore",
+        ".env.example"
+      ],
+      "post_install": [
+        "npm install",
+        "npx prisma generate",
+        "npm run dev"
+      ],
+      "success_criteria": [
+        "package.json exists",
+        "app/page.tsx exists",
+        "app/auth/login/page.tsx exists",
+        "app/dashboard/page.tsx exists",
+        "app/api/auth/[...nextauth]/route.ts exists",
+        "lib/auth.ts exists",
+        "prisma/schema.prisma exists",
+        "package.json has 'next' in dependencies",
+        "package.json has 'next-auth' in dependencies",
+        "package.json has '@prisma/client' in dependencies",
+        "package.json has 'prisma' in devDependencies",
+        "next.config.ts exists",
+        "vercel.json exists",
+        "tsconfig.json exists",
+        ".gitignore exists",
+        ".env.example exists"
+      ]
+    }
+  }
+}

@@ -1,0 +1,517 @@
+{
+  "$schema": "https://vibecodekit.dev/schema/manifest-llm-0.11.json",
+  "kind": "vibecodekit.manifest.llm",
+  "name": "vibecodekit-hybrid-ultra",
+  "version": "0.19.0",
+  "description": "VibecodeKit Hybrid Ultra — agentic OS overlay for Claude Code/Codex CLI/ChatGPT: 25 /vibe-* lifecycle commands + 16 /vck-* extension commands wrapped in a 7-role sub-agent runtime with 6-layer permission pipeline, MCP integration, and 3-tier persistent memory.",
+  "introspection": {
+    "skill_md": "SKILL.md",
+    "plugin_manifest": "assets/plugin-manifest.json",
+    "frontmatter_keys": [
+      "name",
+      "version",
+      "description",
+      "when_to_use",
+      "triggers",
+      "paths"
+    ],
+    "discovery_module": "vibecodekit.skill_discovery"
+  },
+  "skill_frontmatter": {
+    "when_to_use": "Activate when the user wants to scaffold, plan, build, review, or ship a software project end-to-end with structured methodology gates (RRI/RRI-T/RRI-UX), or when they invoke any /vibe-* or /vck-* slash command.",
+    "triggers": [
+      "/vibe-run",
+      "/vibe-doctor",
+      "/vibe-dashboard",
+      "/vibe-audit",
+      "/vibe-permission",
+      "/vibe-install",
+      "/vibe-subagent",
+      "/vibe-compact",
+      "/vibe-blueprint",
+      "/vibe-tip",
+      "/vibe-verify",
+      "/vibe-complete",
+      "/vibe-task",
+      "/vibe-mcp",
+      "/vibe-ledger",
+      "/vibe-memory",
+      "/vibe-approval",
+      "/vibe-scan",
+      "/vibe-vision",
+      "/vibe-rri",
+      "/vibe-rri-t",
+      "/vibe-rri-ux",
+      "/vibe-rri-ui",
+      "/vck-cso",
+      "/vck-review",
+      "/vck-qa",
+      "/vck-qa-only",
+      "/vck-ship",
+      "/vck-investigate",
+      "/vck-canary",
+      "/vck-office-hours",
+      "/vck-ceo-review",
+      "/vck-eng-review",
+      "/vck-design-consultation",
+      "/vck-design-review",
+      "/vck-learn",
+      "/vck-retro",
+      "/vck-second-opinion",
+      "/vck-pipeline"
+    ],
+    "paths": [
+      "**/.vibecode/**",
+      "**/.claw/**",
+      "**/.claw.json",
+      "**/SKILL.md",
+      "**/CLAUDE.md",
+      "**/manifest.llm.json",
+      "**/ai-rules/vibecodekit/**",
+      "**/scripts/vibecodekit/**",
+      "**/assets/plugin-manifest.json",
+      "**/assets/scaffolds/**",
+      "**/assets/templates/**",
+      "**/pyproject.toml",
+      "**/.claude/commands/**",
+      "**/.claude/agents/**",
+      "**/references/**",
+      "**/tools/**"
+    ]
+  },
+  "commands": [
+    {
+      "name": "vibe-run",
+      "file": ".claude/commands/vibe-run.md"
+    },
+    {
+      "name": "vibe-doctor",
+      "file": ".claude/commands/vibe-doctor.md"
+    },
+    {
+      "name": "vibe-dashboard",
+      "file": ".claude/commands/vibe-dashboard.md"
+    },
+    {
+      "name": "vibe-audit",
+      "file": ".claude/commands/vibe-audit.md"
+    },
+    {
+      "name": "vibe-permission",
+      "file": ".claude/commands/vibe-permission.md"
+    },
+    {
+      "name": "vibe-install",
+      "file": ".claude/commands/vibe-install.md"
+    },
+    {
+      "name": "vibe-subagent",
+      "file": ".claude/commands/vibe-subagent.md"
+    },
+    {
+      "name": "vibe-compact",
+      "file": ".claude/commands/vibe-compact.md"
+    },
+    {
+      "name": "vibe-blueprint",
+      "file": ".claude/commands/vibe-blueprint.md"
+    },
+    {
+      "name": "vibe-tip",
+      "file": ".claude/commands/vibe-tip.md"
+    },
+    {
+      "name": "vibe-verify",
+      "file": ".claude/commands/vibe-verify.md"
+    },
+    {
+      "name": "vibe-complete",
+      "file": ".claude/commands/vibe-complete.md"
+    },
+    {
+      "name": "vibe-memory",
+      "file": ".claude/commands/vibe-memory.md"
+    },
+    {
+      "name": "vibe-approval",
+      "file": ".claude/commands/vibe-approval.md"
+    },
+    {
+      "name": "vibe-task",
+      "file": ".claude/commands/vibe-task.md"
+    },
+    {
+      "name": "vibe-scan",
+      "file": ".claude/commands/vibe-scan.md"
+    },
+    {
+      "name": "vibe-vision",
+      "file": ".claude/commands/vibe-vision.md"
+    },
+    {
+      "name": "vibe-rri",
+      "file": ".claude/commands/vibe-rri.md"
+    },
+    {
+      "name": "vibe-rri-t",
+      "file": ".claude/commands/vibe-rri-t.md"
+    },
+    {
+      "name": "vibe-rri-ux",
+      "file": ".claude/commands/vibe-rri-ux.md"
+    },
+    {
+      "name": "vibe-rri-ui",
+      "file": ".claude/commands/vibe-rri-ui.md"
+    },
+    {
+      "name": "vibe",
+      "file": ".claude/commands/vibe.md"
+    },
+    {
+      "name": "vibe-scaffold",
+      "file": ".claude/commands/vibe-scaffold.md"
+    },
+    {
+      "name": "vibe-ship",
+      "file": ".claude/commands/vibe-ship.md"
+    },
+    {
+      "name": "vibe-refine",
+      "file": ".claude/commands/vibe-refine.md"
+    },
+    {
+      "name": "vibe-module",
+      "file": ".claude/commands/vibe-module.md"
+    },
+    {
+      "name": "vck-cso",
+      "file": ".claude/commands/vck-cso.md"
+    },
+    {
+      "name": "vck-review",
+      "file": ".claude/commands/vck-review.md"
+    },
+    {
+      "name": "vck-qa",
+      "file": ".claude/commands/vck-qa.md"
+    },
+    {
+      "name": "vck-qa-only",
+      "file": ".claude/commands/vck-qa-only.md"
+    },
+    {
+      "name": "vck-ship",
+      "file": ".claude/commands/vck-ship.md"
+    },
+    {
+      "name": "vck-investigate",
+      "file": ".claude/commands/vck-investigate.md"
+    },
+    {
+      "name": "vck-canary",
+      "file": ".claude/commands/vck-canary.md"
+    },
+    {
+      "name": "vck-office-hours",
+      "file": ".claude/commands/vck-office-hours.md"
+    },
+    {
+      "name": "vck-ceo-review",
+      "file": ".claude/commands/vck-ceo-review.md"
+    },
+    {
+      "name": "vck-eng-review",
+      "file": ".claude/commands/vck-eng-review.md"
+    },
+    {
+      "name": "vck-design-consultation",
+      "file": ".claude/commands/vck-design-consultation.md"
+    },
+    {
+      "name": "vck-design-review",
+      "file": ".claude/commands/vck-design-review.md"
+    },
+    {
+      "name": "vck-learn",
+      "file": ".claude/commands/vck-learn.md"
+    },
+    {
+      "name": "vck-retro",
+      "file": ".claude/commands/vck-retro.md"
+    },
+    {
+      "name": "vck-second-opinion",
+      "file": ".claude/commands/vck-second-opinion.md"
+    },
+    {
+      "name": "vck-pipeline",
+      "file": ".claude/commands/vck-pipeline.md"
+    }
+  ],
+  "agents": [
+    {
+      "name": "coordinator",
+      "file": ".claude/agents/coordinator.md"
+    },
+    {
+      "name": "scout",
+      "file": ".claude/agents/scout.md"
+    },
+    {
+      "name": "builder",
+      "file": ".claude/agents/builder.md"
+    },
+    {
+      "name": "qa",
+      "file": ".claude/agents/qa.md"
+    },
+    {
+      "name": "security",
+      "file": ".claude/agents/security.md"
+    },
+    {
+      "name": "reviewer",
+      "file": ".claude/agents/reviewer.md"
+    },
+    {
+      "name": "qa-lead",
+      "file": ".claude/agents/qa-lead.md"
+    }
+  ],
+  "hooks": [
+    {
+      "event": "pre_tool_use",
+      "file": ".claw/hooks/pre_tool_use.py"
+    },
+    {
+      "event": "post_tool_use",
+      "file": ".claw/hooks/post_tool_use.py"
+    },
+    {
+      "event": "pre_compact",
+      "file": ".claw/hooks/pre_compact.py"
+    },
+    {
+      "event": "session_start",
+      "file": ".claw/hooks/session_start.py"
+    }
+  ],
+  "servers": [],
+  "references": [
+    {
+      "id": "00-overview",
+      "title": "VibecodeKit v0.7 — Overview & Table of Contents",
+      "path": "references/00-overview.md"
+    },
+    {
+      "id": "01-async-generator-loop",
+      "title": "Pattern #1 — Async generator as control flow",
+      "path": "references/01-async-generator-loop.md"
+    },
+    {
+      "id": "02-derived-needs-follow-up",
+      "title": "Pattern #2 — Derive `needs_follow_up` from observable behaviour",
+      "path": "references/02-derived-needs-follow-up.md"
+    },
+    {
+      "id": "03-escalating-recovery",
+      "title": "Pattern #3 — Escalating recovery",
+      "path": "references/03-escalating-recovery.md"
+    },
+    {
+      "id": "04-concurrency-partitioning",
+      "title": "Pattern #4 — Concurrency-safe partitioning",
+      "path": "references/04-concurrency-partitioning.md"
+    },
+    {
+      "id": "05-streaming-tool-execution",
+      "title": "Pattern #5 — Streaming tool execution",
+      "path": "references/05-streaming-tool-execution.md"
+    },
+    {
+      "id": "06-context-modifier-chain",
+      "title": "Pattern #6 — Context modifier chain",
+      "path": "references/06-context-modifier-chain.md"
+    },
+    {
+      "id": "07-coordinator-restriction",
+      "title": "Pattern #7 — Coordinator restriction",
+      "path": "references/07-coordinator-restriction.md"
+    },
+    {
+      "id": "08-fork-isolation-worktree",
+      "title": "Pattern #8 — Fork isolation via Git worktree",
+      "path": "references/08-fork-isolation-worktree.md"
+    },
+    {
+      "id": "09-five-layer-context-defense",
+      "title": "Pattern #9 — Five-layer context defense",
+      "path": "references/09-five-layer-context-defense.md"
+    },
+    {
+      "id": "10-permission-classification",
+      "title": "Pattern #10 — Permission classification pipeline",
+      "path": "references/10-permission-classification.md"
+    },
+    {
+      "id": "11-conditional-skill-activation",
+      "title": "Pattern #11 — Conditional skill activation",
+      "path": "references/11-conditional-skill-activation.md"
+    },
+    {
+      "id": "12-shell-in-prompt",
+      "title": "Pattern #12 — Shell-in-prompt (policy only)",
+      "path": "references/12-shell-in-prompt.md"
+    },
+    {
+      "id": "13-dynamic-skill-discovery",
+      "title": "Pattern #13 — Dynamic skill discovery",
+      "path": "references/13-dynamic-skill-discovery.md"
+    },
+    {
+      "id": "14-plugin-extension",
+      "title": "Pattern #14 — Plugin extension points",
+      "path": "references/14-plugin-extension.md"
+    },
+    {
+      "id": "15-plugin-sandbox",
+      "title": "Pattern #15 — Plugin / hook sandbox",
+      "path": "references/15-plugin-sandbox.md"
+    },
+    {
+      "id": "16-reconciliation-install",
+      "title": "Pattern #16 — Reconciliation-based install",
+      "path": "references/16-reconciliation-install.md"
+    },
+    {
+      "id": "17-native-replacement",
+      "title": "Pattern #17 — Pure-TS native module replacement (policy only)",
+      "path": "references/17-native-replacement.md"
+    },
+    {
+      "id": "18-terminal-ui",
+      "title": "Pattern #18 — Terminal-as-browser rendering (policy only)",
+      "path": "references/18-terminal-ui.md"
+    },
+    {
+      "id": "19-background-tasks",
+      "title": "19 — Background-task runtime (Giải phẫu §7)",
+      "path": "references/19-background-tasks.md"
+    },
+    {
+      "id": "20-lifecycle",
+      "title": "Vibecode lifecycle — 8 steps, 10 terminal states",
+      "path": "references/20-lifecycle.md"
+    },
+    {
+      "id": "21-rri-methodology",
+      "title": "RRI methodology — 5 personas & SVPFI signals",
+      "path": "references/21-rri-methodology.md"
+    },
+    {
+      "id": "22-rri-ux-ui",
+      "title": "RRI for UX/UI work",
+      "path": "references/22-rri-ux-ui.md"
+    },
+    {
+      "id": "23-permission-matrix",
+      "title": "Permission matrix by role",
+      "path": "references/23-permission-matrix.md"
+    },
+    {
+      "id": "24-memory-governance",
+      "title": "Memory governance",
+      "path": "references/24-memory-governance.md"
+    },
+    {
+      "id": "25-release-governance",
+      "title": "Release governance",
+      "path": "references/25-release-governance.md"
+    },
+    {
+      "id": "26-quality-gates",
+      "title": "Quality gates — 7 dimensions × 8 axes",
+      "path": "references/26-quality-gates.md"
+    },
+    {
+      "id": "27-mcp-adapter",
+      "title": "27 — MCP client adapter (Giải phẫu §2.8, Ch 10)",
+      "path": "references/27-mcp-adapter.md"
+    },
+    {
+      "id": "28-cost-ledger",
+      "title": "28 — Cost / telemetry ledger (Giải phẫu §12.4)",
+      "path": "references/28-cost-ledger.md"
+    },
+    {
+      "id": "29-rri-reverse-interview",
+      "title": "RRI — Reverse Requirements Interview (canonical definition)",
+      "path": "references/29-rri-reverse-interview.md"
+    },
+    {
+      "id": "30-vibecode-master",
+      "title": "VIBECODE Master — 3-actor, 8-step workflow",
+      "path": "references/30-vibecode-master.md"
+    },
+    {
+      "id": "31-rri-t-testing",
+      "title": "RRI-T — Reverse Requirements Interview for Testing",
+      "path": "references/31-rri-t-testing.md"
+    },
+    {
+      "id": "32-rri-ux-critique",
+      "title": "RRI-UX — Reverse Requirements Interview for UX Critique",
+      "path": "references/32-rri-ux-critique.md"
+    },
+    {
+      "id": "33-rri-ui-design",
+      "title": "RRI-UI — UI Design combining RRI-UX + RRI-T",
+      "path": "references/33-rri-ui-design.md"
+    },
+    {
+      "id": "34-style-tokens",
+      "title": "34 · Style tokens — FP/CP rosters + VN-01..VN-12 typography rules",
+      "path": "references/34-style-tokens.md"
+    },
+    {
+      "id": "35-enterprise-module-pattern",
+      "title": "35 · Enterprise Module pattern (v5 Pattern F)",
+      "path": "references/35-enterprise-module-pattern.md"
+    },
+    {
+      "id": "36-copy-patterns",
+      "title": "36 · Copy patterns — CF-01..CF-09 + CF-VN-01..08",
+      "path": "references/36-copy-patterns.md"
+    }
+  ],
+  "runtime_assets": [
+    {
+      "id": "rri-question-bank",
+      "title": "RRI question bank (293 questions × 9 project types × 5 personas × 3 modes)",
+      "path": "assets/rri-question-bank.json",
+      "loader": "vibecodekit.methodology.load_rri_questions"
+    },
+    {
+      "id": "scaffold-docs",
+      "title": "Pattern D — Docs scaffold (Nextra MDX + i18n + search)",
+      "path": "assets/scaffolds/docs/manifest.json",
+      "loader": "vibecodekit.scaffold_engine.preview"
+    }
+  ],
+  "memory": {
+    "writeback_module": "vibecodekit.memory_writeback",
+    "writeback_command": "memory writeback update",
+    "auto_writeback_module": "vibecodekit.auto_writeback",
+    "auto_writeback_command": "memory writeback auto",
+    "auto_trigger_hooks": [
+      "session_start"
+    ],
+    "default_interval_seconds": 1800,
+    "opt_out_marker": ".vibecode/auto_writeback_disabled"
+  },
+  "runtime": {
+    "cli_entrypoint": "python -m vibecodekit.cli",
+    "scripts_module": "vibecodekit"
+  }
+}

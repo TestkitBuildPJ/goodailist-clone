@@ -1,0 +1,27 @@
+// Prisma schema for VibecodeKit SaaS preset.
+// Replace `provider = "sqlite"` with `postgresql` / `mysql` for production.
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  sessions  Session[]
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  expires   DateTime
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}

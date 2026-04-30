@@ -1,0 +1,2096 @@
+{
+  "$schema": "https://vibecodekit.dev/schema/tools-0.1.json",
+  "name": "vibecodekit-hybrid-ultra",
+  "version": "0.16.2",
+  "generated_by": "tools/gen_tools_json.py",
+  "tools": [
+    {
+      "name": "permission_classify",
+      "type": "mcp_tool",
+      "transport": [
+        "stdio",
+        "inproc"
+      ],
+      "description": "Classify a shell command through the 6-layer permission pipeline",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "command": {
+            "type": "string",
+            "description": "Shell command to classify"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "plan",
+              "default",
+              "accept_edits",
+              "bypass",
+              "auto",
+              "bubble"
+            ],
+            "default": "default"
+          }
+        },
+        "required": [
+          "command"
+        ]
+      },
+      "invoke": {
+        "stdio": "python -m vibecodekit.mcp_servers.core  # tools/call permission_classify",
+        "inproc": "from vibecodekit.mcp_servers.core import permission_classify"
+      }
+    },
+    {
+      "name": "permission_decide",
+      "type": "mcp_tool",
+      "transport": [
+        "stdio",
+        "inproc"
+      ],
+      "description": "Full permission decision with mode, rules, and denial store",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "command": {
+            "type": "string",
+            "description": "Shell command to classify"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "plan",
+              "default",
+              "accept_edits",
+              "bypass",
+              "auto",
+              "bubble"
+            ],
+            "default": "default"
+          },
+          "root": {
+            "type": "string",
+            "default": "."
+          }
+        },
+        "required": [
+          "command"
+        ]
+      },
+      "invoke": {
+        "stdio": "python -m vibecodekit.mcp_servers.core  # tools/call permission_decide",
+        "inproc": "from vibecodekit.mcp_servers.core import permission_decide"
+      }
+    },
+    {
+      "name": "doctor_check",
+      "type": "mcp_tool",
+      "transport": [
+        "stdio",
+        "inproc"
+      ],
+      "description": "Health-check a vibecode project layout",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "root": {
+            "type": "string",
+            "default": "."
+          },
+          "installed_only": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "invoke": {
+        "stdio": "python -m vibecodekit.mcp_servers.core  # tools/call doctor_check",
+        "inproc": "from vibecodekit.mcp_servers.core import doctor_check"
+      }
+    },
+    {
+      "name": "audit_run",
+      "type": "mcp_tool",
+      "transport": [
+        "stdio",
+        "inproc"
+      ],
+      "description": "Run the conformance audit (87 internal regression probes)",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "threshold": {
+            "type": "number",
+            "default": 0.85,
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      },
+      "invoke": {
+        "stdio": "python -m vibecodekit.mcp_servers.core  # tools/call audit_run",
+        "inproc": "from vibecodekit.mcp_servers.core import audit_run"
+      }
+    },
+    {
+      "name": "scaffold_list",
+      "type": "mcp_tool",
+      "transport": [
+        "stdio",
+        "inproc"
+      ],
+      "description": "List available scaffold presets (10 presets x 3 stacks)",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "invoke": {
+        "stdio": "python -m vibecodekit.mcp_servers.core  # tools/call scaffold_list",
+        "inproc": "from vibecodekit.mcp_servers.core import scaffold_list"
+      }
+    },
+    {
+      "name": "scaffold_preview",
+      "type": "mcp_tool",
+      "transport": [
+        "stdio",
+        "inproc"
+      ],
+      "description": "Preview a scaffold (file tree + estimated LOC) without writing files",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "preset": {
+            "type": "string",
+            "description": "Scaffold preset name (e.g. api-todo, saas, portfolio)"
+          },
+          "stack": {
+            "type": "string",
+            "description": "Stack variant (fastapi, nextjs, expo)"
+          }
+        },
+        "required": [
+          "preset",
+          "stack"
+        ]
+      },
+      "invoke": {
+        "stdio": "python -m vibecodekit.mcp_servers.core  # tools/call scaffold_preview",
+        "inproc": "from vibecodekit.mcp_servers.core import scaffold_preview"
+      }
+    },
+    {
+      "name": "intent_classify",
+      "type": "mcp_tool",
+      "transport": [
+        "stdio",
+        "inproc"
+      ],
+      "description": "Classify free-form prose to slash commands via the intent router",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "prose": {
+            "type": "string",
+            "description": "Free-form natural language request"
+          }
+        },
+        "required": [
+          "prose"
+        ]
+      },
+      "invoke": {
+        "stdio": "python -m vibecodekit.mcp_servers.core  # tools/call intent_classify",
+        "inproc": "from vibecodekit.mcp_servers.core import intent_classify"
+      }
+    },
+    {
+      "name": "memory_retrieve",
+      "type": "mcp_tool",
+      "transport": [
+        "stdio",
+        "inproc"
+      ],
+      "description": "Retrieve entries from the 3-tier memory hierarchy",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "root": {
+            "type": "string",
+            "default": "."
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "user",
+              "project",
+              "team"
+            ],
+            "default": "project"
+          },
+          "top_k": {
+            "type": "integer",
+            "default": 5
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "invoke": {
+        "stdio": "python -m vibecodekit.mcp_servers.core  # tools/call memory_retrieve",
+        "inproc": "from vibecodekit.mcp_servers.core import memory_retrieve"
+      }
+    },
+    {
+      "name": "memory_add",
+      "type": "mcp_tool",
+      "transport": [
+        "stdio",
+        "inproc"
+      ],
+      "description": "Add an entry to a memory tier",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string"
+          },
+          "root": {
+            "type": "string",
+            "default": "."
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "user",
+              "project",
+              "team"
+            ],
+            "default": "project"
+          },
+          "header": {
+            "type": "string",
+            "description": "Entry header/label",
+            "default": "(mcp-entry)"
+          }
+        },
+        "required": [
+          "content"
+        ]
+      },
+      "invoke": {
+        "stdio": "python -m vibecodekit.mcp_servers.core  # tools/call memory_add",
+        "inproc": "from vibecodekit.mcp_servers.core import memory_add"
+      }
+    },
+    {
+      "name": "memory_stats",
+      "type": "mcp_tool",
+      "transport": [
+        "stdio",
+        "inproc"
+      ],
+      "description": "Per-tier file/entry/byte statistics for the memory hierarchy",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "root": {
+            "type": "string",
+            "default": "."
+          }
+        }
+      },
+      "invoke": {
+        "stdio": "python -m vibecodekit.mcp_servers.core  # tools/call memory_stats",
+        "inproc": "from vibecodekit.mcp_servers.core import memory_stats"
+      }
+    },
+    {
+      "name": "dashboard_summarise",
+      "type": "mcp_tool",
+      "transport": [
+        "stdio",
+        "inproc"
+      ],
+      "description": "Summarise runtime events (tasks, hooks, errors, MCP calls)",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "root": {
+            "type": "string",
+            "default": "."
+          }
+        }
+      },
+      "invoke": {
+        "stdio": "python -m vibecodekit.mcp_servers.core  # tools/call dashboard_summarise",
+        "inproc": "from vibecodekit.mcp_servers.core import dashboard_summarise"
+      }
+    },
+    {
+      "name": "compact_run",
+      "type": "mcp_tool",
+      "transport": [
+        "stdio",
+        "inproc"
+      ],
+      "description": "Run 5-layer context compaction to reduce token usage",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "root": {
+            "type": "string",
+            "default": "."
+          },
+          "reactive": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "invoke": {
+        "stdio": "python -m vibecodekit.mcp_servers.core  # tools/call compact_run",
+        "inproc": "from vibecodekit.mcp_servers.core import compact_run"
+      }
+    },
+    {
+      "name": "vibe run",
+      "type": "cli",
+      "description": "Execute a query-loop plan",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "plan": {
+            "type": "string",
+            "description": "Plan file or inline plan"
+          },
+          "--mode": {
+            "type": "string",
+            "enum": [
+              "default",
+              "plan",
+              "accept_edits",
+              "bypass",
+              "auto",
+              "bubble"
+            ],
+            "default": "default"
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        },
+        "required": [
+          "plan"
+        ]
+      },
+      "invoke": {
+        "cli": "vibe run <plan> [--mode default] [--root .]"
+      }
+    },
+    {
+      "name": "vibe doctor",
+      "type": "cli",
+      "description": "Health-check a vibecode project layout",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "--installed-only": {
+            "type": "boolean",
+            "default": false
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        }
+      },
+      "invoke": {
+        "cli": "vibe doctor [--installed-only] [--root .]"
+      }
+    },
+    {
+      "name": "vibe audit",
+      "type": "cli",
+      "description": "Run conformance audit (87 probes)",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "--threshold": {
+            "type": "number",
+            "default": 0.85,
+            "minimum": 0,
+            "maximum": 1
+          },
+          "--json": {
+            "type": "boolean",
+            "default": false,
+            "description": "Output JSON instead of human-readable table"
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        }
+      },
+      "invoke": {
+        "cli": "vibe audit [--threshold 0.85] [--json] [--root .]"
+      }
+    },
+    {
+      "name": "vibe permission",
+      "type": "cli",
+      "description": "Classify a command through the 6-layer permission pipeline",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "command": {
+            "type": "string",
+            "description": "Shell command to classify"
+          },
+          "--mode": {
+            "type": "string",
+            "enum": [
+              "default",
+              "plan",
+              "accept_edits",
+              "bypass",
+              "auto",
+              "bubble"
+            ],
+            "default": "default"
+          },
+          "--unsafe": {
+            "type": "boolean",
+            "default": false
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        },
+        "required": [
+          "command"
+        ]
+      },
+      "invoke": {
+        "cli": "vibe permission <command> [--mode default] [--root .]"
+      }
+    },
+    {
+      "name": "vibe install",
+      "type": "cli",
+      "description": "Install vibecodekit overlay into a project",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "destination": {
+            "type": "string",
+            "description": "Target project directory"
+          },
+          "--dry-run": {
+            "type": "boolean",
+            "default": false
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        },
+        "required": [
+          "destination"
+        ]
+      },
+      "invoke": {
+        "cli": "vibe install <destination> [--dry-run] [--root .]"
+      }
+    },
+    {
+      "name": "vibe discover",
+      "type": "cli",
+      "description": "Dynamic skill discovery",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "--touched": {
+            "type": "string",
+            "default": null,
+            "description": "File path to check for skill activation"
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        }
+      },
+      "invoke": {
+        "cli": "vibe discover [--touched <path>] [--root .]"
+      }
+    },
+    {
+      "name": "vibe scaffold",
+      "type": "cli",
+      "description": "Scaffold a project from a preset",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Output directory"
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        },
+        "required": [
+          "path"
+        ]
+      },
+      "invoke": {
+        "cli": "vibe scaffold <path> [--root .]"
+      }
+    },
+    {
+      "name": "vibe compact",
+      "type": "cli",
+      "description": "5-layer context compaction",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "--reactive": {
+            "type": "boolean",
+            "default": false
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        }
+      },
+      "invoke": {
+        "cli": "vibe compact [--reactive] [--root .]"
+      }
+    },
+    {
+      "name": "vibe intent",
+      "type": "cli",
+      "description": "Classify free-form prose to slash commands",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "--json": {
+            "type": "boolean",
+            "default": false
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        }
+      },
+      "invoke": {
+        "cli": "vibe intent [--json] [--root .]"
+      }
+    },
+    {
+      "name": "vibe dashboard",
+      "type": "cli",
+      "description": "Runtime event summary",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        }
+      },
+      "invoke": {
+        "cli": "vibe dashboard [--root .]"
+      }
+    },
+    {
+      "name": "vibe demo",
+      "type": "cli",
+      "description": "Run interactive demo showcasing core capabilities (< 2s, zero network)",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        }
+      },
+      "invoke": {
+        "cli": "vibe demo [--root .]"
+      }
+    },
+    {
+      "name": "vibe memory retrieve",
+      "type": "cli",
+      "description": "Retrieve from 3-tier memory hierarchy",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "--top-k": {
+            "type": "integer",
+            "default": 8
+          },
+          "--backend": {
+            "type": "string",
+            "default": null
+          },
+          "--tiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": null
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "invoke": {
+        "cli": "vibe memory retrieve <query> [--top-k 8] [--root .]"
+      }
+    },
+    {
+      "name": "vibe memory add",
+      "type": "cli",
+      "description": "Add entry to a memory tier",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "tier": {
+            "type": "string",
+            "enum": [
+              "user",
+              "team",
+              "project"
+            ]
+          },
+          "text": {
+            "type": "string"
+          },
+          "--header": {
+            "type": "string",
+            "default": "(entry)"
+          },
+          "--source": {
+            "type": "string",
+            "default": "log.jsonl"
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        },
+        "required": [
+          "tier",
+          "text"
+        ]
+      },
+      "invoke": {
+        "cli": "vibe memory add <tier> <text> [--header (entry)] [--root .]"
+      }
+    },
+    {
+      "name": "vibe config show",
+      "type": "cli",
+      "description": "Show current configuration",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        }
+      },
+      "invoke": {
+        "cli": "vibe config show [--root .]"
+      }
+    },
+    {
+      "name": "vibe config set-backend",
+      "type": "cli",
+      "description": "Set embedding backend (hash-256, sentence-transformers)",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "backend": {
+            "type": "string",
+            "enum": [
+              "hash-256",
+              "sentence-transformers"
+            ]
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        },
+        "required": [
+          "backend"
+        ]
+      },
+      "invoke": {
+        "cli": "vibe config set-backend <backend> [--root .]"
+      }
+    },
+    {
+      "name": "vibe verb",
+      "type": "cli",
+      "description": "Front-door 8-verb canonical (PR5) — map verb → slash command",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "verb_name": {
+            "type": "string",
+            "enum": [
+              "scan",
+              "plan",
+              "build",
+              "review",
+              "qa",
+              "ship",
+              "audit",
+              "doctor"
+            ],
+            "description": "Một trong 8 verb chuẩn"
+          },
+          "verb_args": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Args forward verbatim sang slash command đích"
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        },
+        "required": [
+          "verb_name"
+        ]
+      },
+      "invoke": {
+        "cli": "vibe verb <verb_name> [args...] [--root .]"
+      }
+    },
+    {
+      "name": "vibe subagent",
+      "type": "cli",
+      "description": "Spawn sub-agent (coordinator/scout/builder/qa/security/reviewer/qa-lead)",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "spawn"
+            ]
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "invoke": {
+        "cli": "vibe subagent spawn [--root .]"
+      }
+    },
+    {
+      "name": "vibe task",
+      "type": "cli",
+      "description": "Background-task runtime (DAG of TIPs) — 7 task kinds × 5 states",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "start",
+              "agent",
+              "workflow",
+              "monitor",
+              "list",
+              "status",
+              "kill",
+              "read",
+              "dream",
+              "stalls"
+            ],
+            "description": "Sub-action; xem `vibe task <action> --help`"
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "invoke": {
+        "cli": "vibe task <action> [args...] [--root .]"
+      }
+    },
+    {
+      "name": "vibe mcp",
+      "type": "cli",
+      "description": "MCP (Model Context Protocol) server management",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "list",
+              "register",
+              "disable",
+              "call",
+              "tools"
+            ]
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "invoke": {
+        "cli": "vibe mcp <action> [args...] [--root .]"
+      }
+    },
+    {
+      "name": "vibe ledger",
+      "type": "cli",
+      "description": "Token/cost ledger — summary hoặc reset usage tracking",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "summary",
+              "reset"
+            ]
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "invoke": {
+        "cli": "vibe ledger <summary|reset> [--root .]"
+      }
+    },
+    {
+      "name": "vibe approval",
+      "type": "cli",
+      "description": "Human-in-the-loop approval JSON contract",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "list",
+              "create",
+              "respond",
+              "get"
+            ]
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "invoke": {
+        "cli": "vibe approval <action> [args...] [--root .]"
+      }
+    },
+    {
+      "name": "vibe rri-t",
+      "type": "cli",
+      "description": "RRI-T release gate — 7 dimensions × 8 stress axes (testing matrix)",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path to JSONL file of RRI-T test entries"
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        },
+        "required": [
+          "path"
+        ]
+      },
+      "invoke": {
+        "cli": "vibe rri-t <path> [--root .]"
+      }
+    },
+    {
+      "name": "vibe rri-ux",
+      "type": "cli",
+      "description": "RRI-UX release gate — 7 dimensions × 8 Flow Physics axes (UX critique)",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path to JSONL file of RRI-UX critique entries"
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        },
+        "required": [
+          "path"
+        ]
+      },
+      "invoke": {
+        "cli": "vibe rri-ux <path> [--root .]"
+      }
+    },
+    {
+      "name": "vibe vn-check",
+      "type": "cli",
+      "description": "Vietnamese 12-point release checklist gate",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "--flags-json": {
+            "type": "string",
+            "description": "Inline JSON dict {flag: bool}"
+          },
+          "--file": {
+            "type": "string",
+            "description": "Path tới JSON file chứa flags dict"
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        },
+        "description": "Yêu cầu chính xác 1 trong --flags-json hoặc --file (mutex)"
+      },
+      "invoke": {
+        "cli": "vibe vn-check (--flags-json '{...}' | --file flags.json) [--root .]"
+      }
+    },
+    {
+      "name": "vibe ship",
+      "type": "cli",
+      "description": "Deploy / ship to one of 7 targets (Vercel/Docker/VPS/Cloudflare/Railway/Fly/Render)",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "history",
+              "rollback"
+            ],
+            "description": "Sub-action (optional)"
+          },
+          "--target": {
+            "type": "string",
+            "description": "Force a specific deploy target"
+          },
+          "--prod": {
+            "type": "boolean",
+            "default": false,
+            "description": "Production deploy (vercel only)"
+          },
+          "--dry-run": {
+            "type": "boolean",
+            "default": false,
+            "description": "Use DryRunner instead of real subprocess"
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        }
+      },
+      "invoke": {
+        "cli": "vibe ship [--target <name>] [--prod] [--dry-run] [--root .]"
+      }
+    },
+    {
+      "name": "vibe manifest",
+      "type": "cli",
+      "description": "Manifest.llm.json emit / show — LLM introspection layer",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "emit",
+              "show"
+            ]
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "invoke": {
+        "cli": "vibe manifest <emit|show> [--root .]"
+      }
+    },
+    {
+      "name": "vibe refine",
+      "type": "cli",
+      "description": "Refine ticket (BƯỚC 8/8) — classify diff against v5 envelope",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "classify"
+            ]
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "invoke": {
+        "cli": "vibe refine classify [args...] [--root .]"
+      }
+    },
+    {
+      "name": "vibe verify",
+      "type": "cli",
+      "description": "Adversarial QA gate — REQ-* coverage from blueprint matrix + verify report",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "coverage"
+            ]
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "invoke": {
+        "cli": "vibe verify coverage [args...] [--root .]"
+      }
+    },
+    {
+      "name": "vibe anti-patterns",
+      "type": "cli",
+      "description": "Anti-pattern auditor — 12-pattern checklist + gate evaluation",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "list",
+              "check"
+            ]
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "invoke": {
+        "cli": "vibe anti-patterns <list|check> [args...] [--root .]"
+      }
+    },
+    {
+      "name": "vibe module",
+      "type": "cli",
+      "description": "Pattern F — add module to existing codebase (probe / plan)",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "probe",
+              "plan"
+            ]
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "invoke": {
+        "cli": "vibe module <probe|plan> [args...] [--root .]"
+      }
+    },
+    {
+      "name": "vibe context",
+      "type": "cli",
+      "description": "Dynamic context-block builder cho slash command",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "--command": {
+            "type": "string",
+            "description": "Slash command name (vd. 'vibe-vision')"
+          },
+          "--project-type": {
+            "type": "string",
+            "description": "Project type cho dynamic blocks (recommend_stack / RRI)"
+          },
+          "--persona": {
+            "type": "string",
+            "enum": [
+              "end_user",
+              "ba",
+              "qa",
+              "developer",
+              "operator"
+            ],
+            "description": "RRI persona filter"
+          },
+          "--mode-filter": {
+            "type": "string",
+            "enum": [
+              "CHALLENGE",
+              "GUIDED",
+              "EXPLORE"
+            ]
+          },
+          "--max-questions": {
+            "type": "integer",
+            "description": "Cap số câu RRI dynamic inject"
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        },
+        "required": [
+          "--command"
+        ]
+      },
+      "invoke": {
+        "cli": "vibe context --command <name> [--project-type ...] [--persona ...] [--root .]"
+      }
+    },
+    {
+      "name": "vibe activate",
+      "type": "cli",
+      "description": "Test một file path against SKILL.md `paths:` globs (skill activation contract)",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "File path để test against SKILL.md paths globs"
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        },
+        "required": [
+          "path"
+        ]
+      },
+      "invoke": {
+        "cli": "vibe activate <path> [--root .]"
+      }
+    },
+    {
+      "name": "vibe team",
+      "type": "cli",
+      "description": "Team memory mode (multi-developer shared context) — forwarded to vibecodekit.team_mode",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "team_argv": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Args forward verbatim sang `python -m vibecodekit.team_mode`"
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        }
+      },
+      "invoke": {
+        "cli": "vibe team [team_argv...] [--root .]"
+      }
+    },
+    {
+      "name": "vibe learn",
+      "type": "cli",
+      "description": "Capture learning vào .vibecode/learnings.jsonl (forwarded to vibecodekit.learnings)",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "learn_argv": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Args forward verbatim sang `python -m vibecodekit.learnings`"
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        }
+      },
+      "invoke": {
+        "cli": "vibe learn [learn_argv...] [--root .]"
+      }
+    },
+    {
+      "name": "vibe pipeline",
+      "type": "cli",
+      "description": "Master pipeline router — dispatch tới 1/3 VCK-HU pipeline (project / feature / code-sec)",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "pipeline_argv": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Args forward verbatim sang `python -m vibecodekit.pipeline_router`"
+          },
+          "--root": {
+            "type": "string",
+            "default": "."
+          }
+        }
+      },
+      "invoke": {
+        "cli": "vibe pipeline [pipeline_argv...] [--root .]"
+      }
+    },
+    {
+      "name": "/vibe-run",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vibe-run.md",
+      "file": ".claude/commands/vibe-run.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vibe-run [args]"
+      }
+    },
+    {
+      "name": "/vibe-doctor",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vibe-doctor.md",
+      "file": ".claude/commands/vibe-doctor.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vibe-doctor [args]"
+      }
+    },
+    {
+      "name": "/vibe-dashboard",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vibe-dashboard.md",
+      "file": ".claude/commands/vibe-dashboard.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vibe-dashboard [args]"
+      }
+    },
+    {
+      "name": "/vibe-audit",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vibe-audit.md",
+      "file": ".claude/commands/vibe-audit.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vibe-audit [args]"
+      }
+    },
+    {
+      "name": "/vibe-permission",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vibe-permission.md",
+      "file": ".claude/commands/vibe-permission.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vibe-permission [args]"
+      }
+    },
+    {
+      "name": "/vibe-install",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vibe-install.md",
+      "file": ".claude/commands/vibe-install.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vibe-install [args]"
+      }
+    },
+    {
+      "name": "/vibe-subagent",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vibe-subagent.md",
+      "file": ".claude/commands/vibe-subagent.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vibe-subagent [args]"
+      }
+    },
+    {
+      "name": "/vibe-compact",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vibe-compact.md",
+      "file": ".claude/commands/vibe-compact.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vibe-compact [args]"
+      }
+    },
+    {
+      "name": "/vibe-blueprint",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vibe-blueprint.md",
+      "file": ".claude/commands/vibe-blueprint.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vibe-blueprint [args]"
+      }
+    },
+    {
+      "name": "/vibe-tip",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vibe-tip.md",
+      "file": ".claude/commands/vibe-tip.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vibe-tip [args]"
+      }
+    },
+    {
+      "name": "/vibe-verify",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vibe-verify.md",
+      "file": ".claude/commands/vibe-verify.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vibe-verify [args]"
+      }
+    },
+    {
+      "name": "/vibe-complete",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vibe-complete.md",
+      "file": ".claude/commands/vibe-complete.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vibe-complete [args]"
+      }
+    },
+    {
+      "name": "/vibe-memory",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vibe-memory.md",
+      "file": ".claude/commands/vibe-memory.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vibe-memory [args]"
+      }
+    },
+    {
+      "name": "/vibe-approval",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vibe-approval.md",
+      "file": ".claude/commands/vibe-approval.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vibe-approval [args]"
+      }
+    },
+    {
+      "name": "/vibe-task",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vibe-task.md",
+      "file": ".claude/commands/vibe-task.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vibe-task [args]"
+      }
+    },
+    {
+      "name": "/vibe-scan",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vibe-scan.md",
+      "file": ".claude/commands/vibe-scan.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vibe-scan [args]"
+      }
+    },
+    {
+      "name": "/vibe-vision",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vibe-vision.md",
+      "file": ".claude/commands/vibe-vision.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vibe-vision [args]"
+      }
+    },
+    {
+      "name": "/vibe-rri",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vibe-rri.md",
+      "file": ".claude/commands/vibe-rri.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vibe-rri [args]"
+      }
+    },
+    {
+      "name": "/vibe-rri-t",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vibe-rri-t.md",
+      "file": ".claude/commands/vibe-rri-t.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vibe-rri-t [args]"
+      }
+    },
+    {
+      "name": "/vibe-rri-ux",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vibe-rri-ux.md",
+      "file": ".claude/commands/vibe-rri-ux.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vibe-rri-ux [args]"
+      }
+    },
+    {
+      "name": "/vibe-rri-ui",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vibe-rri-ui.md",
+      "file": ".claude/commands/vibe-rri-ui.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vibe-rri-ui [args]"
+      }
+    },
+    {
+      "name": "/vibe",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vibe.md",
+      "file": ".claude/commands/vibe.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vibe [args]"
+      }
+    },
+    {
+      "name": "/vibe-scaffold",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vibe-scaffold.md",
+      "file": ".claude/commands/vibe-scaffold.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vibe-scaffold [args]"
+      }
+    },
+    {
+      "name": "/vibe-ship",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vibe-ship.md",
+      "file": ".claude/commands/vibe-ship.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vibe-ship [args]"
+      }
+    },
+    {
+      "name": "/vibe-refine",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vibe-refine.md",
+      "file": ".claude/commands/vibe-refine.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vibe-refine [args]"
+      }
+    },
+    {
+      "name": "/vibe-module",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vibe-module.md",
+      "file": ".claude/commands/vibe-module.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vibe-module [args]"
+      }
+    },
+    {
+      "name": "/vck-cso",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vck-cso.md",
+      "file": ".claude/commands/vck-cso.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vck-cso [args]"
+      }
+    },
+    {
+      "name": "/vck-review",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vck-review.md",
+      "file": ".claude/commands/vck-review.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vck-review [args]"
+      }
+    },
+    {
+      "name": "/vck-qa",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vck-qa.md",
+      "file": ".claude/commands/vck-qa.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vck-qa [args]"
+      }
+    },
+    {
+      "name": "/vck-qa-only",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vck-qa-only.md",
+      "file": ".claude/commands/vck-qa-only.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vck-qa-only [args]"
+      }
+    },
+    {
+      "name": "/vck-ship",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vck-ship.md",
+      "file": ".claude/commands/vck-ship.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vck-ship [args]"
+      }
+    },
+    {
+      "name": "/vck-investigate",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vck-investigate.md",
+      "file": ".claude/commands/vck-investigate.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vck-investigate [args]"
+      }
+    },
+    {
+      "name": "/vck-canary",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vck-canary.md",
+      "file": ".claude/commands/vck-canary.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vck-canary [args]"
+      }
+    },
+    {
+      "name": "/vck-office-hours",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vck-office-hours.md",
+      "file": ".claude/commands/vck-office-hours.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vck-office-hours [args]"
+      }
+    },
+    {
+      "name": "/vck-ceo-review",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vck-ceo-review.md",
+      "file": ".claude/commands/vck-ceo-review.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vck-ceo-review [args]"
+      }
+    },
+    {
+      "name": "/vck-eng-review",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vck-eng-review.md",
+      "file": ".claude/commands/vck-eng-review.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vck-eng-review [args]"
+      }
+    },
+    {
+      "name": "/vck-design-consultation",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vck-design-consultation.md",
+      "file": ".claude/commands/vck-design-consultation.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vck-design-consultation [args]"
+      }
+    },
+    {
+      "name": "/vck-design-review",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vck-design-review.md",
+      "file": ".claude/commands/vck-design-review.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vck-design-review [args]"
+      }
+    },
+    {
+      "name": "/vck-learn",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vck-learn.md",
+      "file": ".claude/commands/vck-learn.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vck-learn [args]"
+      }
+    },
+    {
+      "name": "/vck-retro",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vck-retro.md",
+      "file": ".claude/commands/vck-retro.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vck-retro [args]"
+      }
+    },
+    {
+      "name": "/vck-second-opinion",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vck-second-opinion.md",
+      "file": ".claude/commands/vck-second-opinion.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vck-second-opinion [args]"
+      }
+    },
+    {
+      "name": "/vck-pipeline",
+      "type": "slash_command",
+      "description": "Slash command — see .claude/commands/vck-pipeline.md",
+      "file": ".claude/commands/vck-pipeline.md",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "args": {
+            "type": "string",
+            "description": "Free-form arguments passed after the command name"
+          }
+        }
+      },
+      "invoke": {
+        "slash": "/vck-pipeline [args]"
+      }
+    }
+  ]
+}

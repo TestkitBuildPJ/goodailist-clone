@@ -1,0 +1,41 @@
+{
+  "name": "blog",
+  "description": "Blog with markdown posts and listing page",
+  "stacks": {
+    "nextjs": {
+      "files": [
+        "package.json",
+        "README.md",
+        "app/page.tsx",
+        "app/layout.tsx",
+        "app/posts/page.tsx",
+        "tailwind.config.ts",
+        "postcss.config.js",
+        "app/globals.css",
+        "next.config.ts",
+        "vercel.json",
+        "tsconfig.json",
+        ".gitignore",
+        ".env.example"
+      ],
+      "post_install": [
+        "npm install",
+        "npm run dev"
+      ],
+      "success_criteria": [
+        "package.json exists",
+        "app/posts/page.tsx exists",
+        "package.json has 'next' in dependencies",
+        "tailwind.config.ts exists",
+        "postcss.config.js exists",
+        "app/globals.css exists",
+        "package.json has 'tailwindcss' in devDependencies",
+        "next.config.ts exists",
+        "vercel.json exists",
+        "tsconfig.json exists",
+        ".gitignore exists",
+        ".env.example exists"
+      ]
+    }
+  }
+}

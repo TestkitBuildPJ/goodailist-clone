@@ -1,0 +1,37 @@
+# Cấu hình
+
+Tất cả cấu hình docs nằm trong `theme.config.tsx`:
+
+```tsx
+import type { DocsThemeConfig } from "nextra-theme-docs";
+
+const config: DocsThemeConfig = {
+  logo: <span>Your Brand</span>,
+  project: { link: "https://github.com/your-org/your-docs" },
+  // ...
+};
+```
+
+## i18n
+
+```tsx
+i18n: [
+  { locale: "vi", name: "Tiếng Việt" },
+  { locale: "en", name: "English" }
+]
+```
+
+Tạo file `<page>.<locale>.mdx` cạnh file gốc để bản địa hoá.
+
+## Tìm kiếm
+
+Bật Algolia DocSearch bằng cách set 3 biến môi trường:
+
+```env
+NEXT_PUBLIC_ALGOLIA_APP_ID=...
+NEXT_PUBLIC_ALGOLIA_API_KEY=...
+NEXT_PUBLIC_ALGOLIA_INDEX_NAME=...
+```
+
+Khi không có Algolia, Nextra dùng tìm kiếm tĩnh (không index codeblocks
+— xem flag trong `next.config.mjs`).

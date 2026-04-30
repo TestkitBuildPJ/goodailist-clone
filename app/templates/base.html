@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}goodailist-clone{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  </head>
+  <body class="bg-slate-50 text-slate-900 min-h-screen">
+    <header class="bg-white border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 py-4 flex items-center gap-6">
+        <a href="/repos" class="font-semibold text-lg">goodailist-clone</a>
+        <nav class="flex gap-4 text-sm">
+          <a href="/repos" class="hover:underline {% if active == 'repos' %}font-semibold text-blue-600{% endif %}">Repos</a>
+          <a href="/charts" class="hover:underline {% if active == 'charts' %}font-semibold text-blue-600{% endif %}">Charts</a>
+        </nav>
+        <span class="ml-auto text-xs text-slate-500">Phase A · 30 seed repos · VibecodeKit Hybrid Ultra v0.19.0</span>
+      </div>
+    </header>
+    <main class="max-w-7xl mx-auto px-4 py-6">
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>

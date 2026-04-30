@@ -1,0 +1,19 @@
+{
+  "name": "sample-plan",
+  "description": "A minimal end-to-end plan exercising the v0.7 query loop. Uses only paths that exist in any project after extraction.",
+  "turns": [
+    {
+      "title": "Survey",
+      "tool_uses": [
+        {"tool": "list_files", "input": {"path": ".", "depth": 2}},
+        {"tool": "grep",       "input": {"pattern": "TODO|FIXME", "path": "."}}
+      ]
+    },
+    {
+      "title": "Glob markdown",
+      "tool_uses": [
+        {"tool": "glob", "input": {"pattern": "**/*.md", "max_results": 20}}
+      ]
+    }
+  ]
+}

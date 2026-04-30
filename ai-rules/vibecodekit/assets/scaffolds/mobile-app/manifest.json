@@ -1,0 +1,32 @@
+{
+  "name": "mobile-app",
+  "description": "Expo React Native starter with bottom tabs",
+  "stacks": {
+    "expo": {
+      "files": [
+        "package.json",
+        "README.md",
+        "App.tsx",
+        "app.json",
+        "tsconfig.json",
+        "babel.config.js",
+        ".gitignore",
+        ".env.example"
+      ],
+      "post_install": [
+        "npm install",
+        "npx expo start"
+      ],
+      "success_criteria": [
+        "package.json exists",
+        "App.tsx exists",
+        "package.json has 'expo' in dependencies",
+        "tsconfig.json exists",
+        "babel.config.js exists",
+        ".gitignore exists",
+        ".env.example exists",
+        "package.json has 'typescript' in devDependencies"
+      ]
+    }
+  }
+}
