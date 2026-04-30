@@ -9,10 +9,22 @@ from __future__ import annotations
 import os
 from collections.abc import Iterator
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, event
 from sqlalchemy.engine import Engine
 from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
 from sqlalchemy.pool import StaticPool
+
+
+@event.listens_for(Engine, "connect")
+def _enable_sqlite_fk(dbapi_connection: object, connection_record: object) -> None:
+    """Enforce foreign keys on SQLite (off by default).
+
+    Phase B relies on ON DELETE CASCADE for snapshot rows when a repo is removed.
+    """
+    if dbapi_connection.__class__.__module__.startswith("sqlite3"):
+        cur = dbapi_connection.cursor()  # type: ignore[attr-defined]
+        cur.execute("PRAGMA foreign_keys=ON")
+        cur.close()
 
 
 class Base(DeclarativeBase):
