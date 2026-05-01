@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import date
+from datetime import date, datetime
 
 from pydantic import BaseModel, ConfigDict
 
@@ -38,3 +38,29 @@ class ChartSeries(BaseModel):
 
     category: str
     points: list[ChartPoint]
+
+
+class IngestRunRead(BaseModel):
+    """Audit row for one ingest run, surfaced via ``/admin/runs``."""
+
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    started_at: datetime
+    finished_at: datetime | None
+    status: str
+    repos_updated: int
+    api_calls: int
+    etag_hits: int
+    error_msg: str | None
+
+
+class RefreshResponse(BaseModel):
+    """Response payload for ``POST /admin/refresh``."""
+
+    run_id: int | None
+    status: str
+    repos_updated: int
+    api_calls: int
+    etag_hits: int
+    error_msg: str | None
