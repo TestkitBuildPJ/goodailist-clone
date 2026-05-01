@@ -50,11 +50,22 @@ def _anchor_series(repos: list[Repo]) -> dict[str, dict[date, int]]:
 def _snapshot_series(session: Session, repos: list[Repo]) -> dict[str, dict[date, int]]:
     """Phase B path: aggregate ``repo_star_snapshots`` into per-(category, date) sums.
 
+    Each repo contributes **at most one** stars value per calendar day,
+    even if multiple snapshots exist on that day (e.g. the daily cron tick
+    plus an operator-triggered ``POST /admin/refresh``, or backfill rows
+    overlapping with a real ingest).  We keep the latest snapshot per
+    ``(repo_id, date)`` pair and discard the earlier rows so a repo is
+    not counted twice in the per-category total for that day.
+
     Repos that have not been ingested yet are filled in from their anchor
     approximation so the chart never has gaps.
     """
     by_category: dict[str, dict[date, int]] = defaultdict(lambda: defaultdict(int))
     repos_with_snapshots: set[int] = set()
+    # Iterating ordered by ``captured_at`` ASC means the assignment below
+    # overwrites earlier rows of the same (repo, day), leaving the final
+    # mapping holding only the most-recent stars value per pair.
+    latest_per_day: dict[tuple[int, date], tuple[str, int]] = {}
 
     for snap, repo in (
         session.query(RepoStarSnapshot, Repo)
@@ -63,8 +74,13 @@ def _snapshot_series(session: Session, repos: list[Repo]) -> dict[str, dict[date
         .all()
     ):
         repos_with_snapshots.add(int(repo.id))
-        d = snap.captured_at.date()
-        by_category[repo.category][d] += int(snap.stars)
+        latest_per_day[(int(repo.id), snap.captured_at.date())] = (
+            str(repo.category),
+            int(snap.stars),
+        )
+
+    for (_repo_id, d), (category, stars) in latest_per_day.items():
+        by_category[category][d] += stars
 
     # Repos with zero snapshots: fall back to anchors so they still contribute.
     cold_repos = [r for r in repos if int(r.id) not in repos_with_snapshots]
