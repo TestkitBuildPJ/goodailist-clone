@@ -48,6 +48,12 @@ ignore = ["E501", "B008"]  # B008: FastAPI Depends/Query in defaults is idiomati
 [tool.ruff.lint.per-file-ignores]
 "tests/*" = ["N806"]  # capitalised local var (`Maker = sessionmaker(...)`) is idiomatic.
 
+[tool.ruff.lint.isort]
+known-first-party = ["app"]
+# Pin third-party group so import sort is stable across ruff versions
+# (older ruff guessed alembic as first-party, ruff>=0.15 resolves it as 3rd-party).
+known-third-party = ["alembic"]
+
 [tool.mypy]
 python_version = "3.12"
 strict = true

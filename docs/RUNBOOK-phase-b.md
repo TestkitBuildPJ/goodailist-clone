@@ -176,7 +176,7 @@ For deeper visibility:
 ```bash
 # Latest 5 ingest runs + their status.
 fly ssh console --app $FLY_APP \
-  --command "sqlite3 /data/goodailist.db 'SELECT started_at, finished_at, status, repos_seen, repos_etag_hit FROM ingest_runs ORDER BY id DESC LIMIT 5;'"
+  --command "sqlite3 /data/goodailist.db 'SELECT started_at, finished_at, status, repos_updated, etag_hits FROM ingest_runs ORDER BY id DESC LIMIT 5;'"
 
 # Snapshot count + max(captured_at).
 fly ssh console --app $FLY_APP \
@@ -184,7 +184,7 @@ fly ssh console --app $FLY_APP \
 
 # ETag hit rate over the last 7 days (target ≥ 50%).
 fly ssh console --app $FLY_APP \
-  --command "sqlite3 /data/goodailist.db \"SELECT SUM(repos_etag_hit) * 100.0 / SUM(repos_seen) FROM ingest_runs WHERE started_at > datetime('now', '-7 days');\""
+  --command "sqlite3 /data/goodailist.db \"SELECT SUM(etag_hits) * 100.0 / SUM(repos_updated) FROM ingest_runs WHERE started_at > datetime('now', '-7 days');\""
 ```
 
 ---

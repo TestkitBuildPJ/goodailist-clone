@@ -17,12 +17,12 @@ from collections.abc import Generator
 from datetime import datetime
 
 import pytest
+from alembic.migration import MigrationContext
+from alembic.operations import Operations
 from sqlalchemy import create_engine, text
 from sqlalchemy.engine import Engine
 from sqlalchemy.orm import sessionmaker
 
-from alembic.migration import MigrationContext
-from alembic.operations import Operations
 from app.db import Base
 from app.models import Repo, RepoStarSnapshot
 from app.seed import seed_into
