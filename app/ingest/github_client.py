@@ -133,10 +133,12 @@ class GithubClient:
         stars = payload.get("stargazers_count")
         forks = payload.get("forks_count")
         etag = response.headers.get("ETag")
-        if etag:
-            self._store.set(owner, repo, etag)
         if not isinstance(stars, int) or not isinstance(forks, int):
             raise UpstreamError(f"{owner}/{repo}: missing stargazers_count/forks_count")
+        # Cache ETag only after validating payload — otherwise a malformed-but-200
+        # poisons the cache and the next tick 304s with no real data ever recovered.
+        if etag:
+            self._store.set(owner, repo, etag)
         return RepoFetch(owner=owner, repo=repo, cached=False, stars=stars, forks=forks, etag=etag)
 
     async def _sleep_until_reset(self, response: httpx.Response) -> None:

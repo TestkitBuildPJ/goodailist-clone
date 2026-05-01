@@ -158,6 +158,22 @@ async def test_fetch_repo_missing_fields_raises_upstream_error() -> None:
 
 @pytest.mark.asyncio
 @respx.mock
+async def test_etag_not_stored_when_payload_invalid() -> None:
+    """ETag must NOT be cached if validation fails (Devin Review finding on PR #6)."""
+    store = EtagStore()
+    respx.get(f"{GITHUB_API}/repos/acme/widget").mock(
+        return_value=httpx.Response(
+            200, json={"name": "no-stars-here"}, headers={"ETag": '"poisoned"'}
+        )
+    )
+    async with GithubClient(token=None, store=store) as client:
+        with pytest.raises(UpstreamError):
+            await client.fetch_repo("acme", "widget")
+    assert store.get("acme", "widget") is None
+
+
+@pytest.mark.asyncio
+@respx.mock
 async def test_token_is_sent_in_authorization_header() -> None:
     route = respx.get(f"{GITHUB_API}/repos/acme/widget").mock(
         return_value=httpx.Response(200, json={"stargazers_count": 1, "forks_count": 0})
