@@ -20,7 +20,7 @@ from app.ingest.scheduler import (
     should_start,
 )
 from app.models import Repo
-from app.routes import charts, repos
+from app.routes import admin, charts, repos
 from app.seed import seed_into
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -79,6 +79,7 @@ def create_app() -> FastAPI:
 
     app.include_router(repos.router)
     app.include_router(charts.router)
+    app.include_router(admin.router)
 
     return app
 
