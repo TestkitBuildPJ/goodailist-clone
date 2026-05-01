@@ -108,6 +108,65 @@ def test_charts_uses_snapshots_when_available(
         )
 
 
+def test_charts_dedupes_multiple_snapshots_on_same_day(engine: Engine) -> None:
+    """Multiple snapshots per (repo, day) must not double-count the repo.
+
+    Regression: previously ``_snapshot_series`` summed every snapshot row
+    per (category, date) without deduping by repo, so an admin
+    ``POST /admin/refresh`` (which writes a second snapshot the same day
+    as the cron tick) inflated the chart's per-category total by the
+    full repo stars value for that day.
+
+    We assert at the ``_snapshot_series`` layer (pre-running_max) so that
+    monotone clamping from earlier dates does not mask the bug.
+    """
+    from datetime import date as _date
+
+    from app.routes.charts import _snapshot_series
+
+    Maker = sessionmaker(bind=engine, autoflush=False, expire_on_commit=False, future=True)
+    with Maker() as s:
+        # Single isolated repo so the (category, day) bucket holds only
+        # this repo's contribution and we can pin-test the dedupe value.
+        s.add(
+            Repo(
+                id=4242,
+                org="test-org",
+                name="test-repo",
+                stars=1003,
+                stars_1d_ago=1003,
+                stars_7d_ago=1003,
+                forks=10,
+                description="t",
+                category="Eval",
+                created_at=_date(2024, 1, 1),
+                updated_at=_date(2026, 4, 30),
+            )
+        )
+        # 3 snapshots on the same UTC day at 03:00, 12:00, 18:00 with
+        # increasing stars.  Dedupe must keep only 1003 — NOT sum
+        # 1000 + 1001 + 1003 = 3004.
+        day = datetime(2026, 4, 30, tzinfo=UTC).replace(tzinfo=None)
+        for hour, stars in [(3, 1000), (12, 1001), (18, 1003)]:
+            s.add(
+                RepoStarSnapshot(
+                    repo_id=4242,
+                    captured_at=day.replace(hour=hour),
+                    stars=stars,
+                    forks=10,
+                )
+            )
+        s.commit()
+
+    with Maker() as s:
+        repos = list(s.query(Repo).all())
+        raw = _snapshot_series(s, repos)
+
+    apr_30 = raw["Eval"][day.date()]
+    # Exactly the latest snapshot's stars — no double-counting.
+    assert apr_30 == 1003
+
+
 def test_charts_falls_back_when_some_repos_lack_snapshots(
     engine: Engine,
 ) -> None:
