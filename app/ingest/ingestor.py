@@ -13,14 +13,14 @@ from __future__ import annotations
 import logging
 from contextlib import suppress
 from dataclasses import dataclass, field
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 
 from sqlalchemy.engine import Engine
 from sqlalchemy.orm import Session, sessionmaker
 
 from app.db import get_engine
 from app.ingest.etag_store import EtagStore
-from app.ingest.github_client import GithubClient, UpstreamError
+from app.ingest.github_client import GithubClient, RateLimitError, UpstreamError
 from app.models import IngestRun, Repo, RepoStarSnapshot
 
 logger = logging.getLogger(__name__)
@@ -101,11 +101,19 @@ async def run_once(
     owns_client = client is None
     gh = client or GithubClient(store=store)
 
+    rate_limited = False
     try:
         watch = _watchlist(sessionmaker_factory)
         for repo_id, owner, name in watch:
             try:
                 fetch = await gh.fetch_repo(owner, name)
+            except RateLimitError as exc:
+                # Token-scoped rate limit — every subsequent call would also 429.
+                # Stop iterating and finalize whatever we already have.
+                logger.warning("ingest aborting after rate-limit on %s/%s: %s", owner, name, exc)
+                stats.failed_repos.append(f"{owner}/{name}")
+                rate_limited = True
+                break
             except UpstreamError as exc:
                 logger.warning("ingest skip %s/%s: %s", owner, name, exc)
                 stats.failed_repos.append(f"{owner}/{name}")
@@ -123,7 +131,18 @@ async def run_once(
                     snapshot_forks = int(repo.forks)
                 else:
                     assert fetch.stars is not None and fetch.forks is not None
-                    repo.stars_7d_ago = int(repo.stars_7d_ago)
+                    # Advance 7d-ago from snapshots ≥ 7 days old (best-effort).
+                    seven_d = (
+                        session.query(RepoStarSnapshot)
+                        .filter(
+                            RepoStarSnapshot.repo_id == repo_id,
+                            RepoStarSnapshot.captured_at <= captured_at - timedelta(days=7),
+                        )
+                        .order_by(RepoStarSnapshot.captured_at.desc())
+                        .first()
+                    )
+                    if seven_d is not None:
+                        repo.stars_7d_ago = int(seven_d.stars)
                     repo.stars_1d_ago = int(repo.stars)
                     repo.stars = int(fetch.stars)
                     repo.forks = int(fetch.forks)
@@ -144,7 +163,13 @@ async def run_once(
         stats.api_calls = gh.api_calls
         stats.etag_hits = gh.etag_hits
 
-        if stats.failed_repos:
+        if rate_limited:
+            stats.status = "partial" if stats.repos_updated > 0 else "failed"
+            stats.error_msg = (
+                f"rate-limited after {stats.repos_updated}; failed: "
+                f"{', '.join(stats.failed_repos[:5])}"
+            )
+        elif stats.failed_repos:
             stats.status = "partial"
             stats.error_msg = f"failed: {', '.join(stats.failed_repos[:5])}"
         else:
