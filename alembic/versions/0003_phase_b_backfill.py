@@ -69,18 +69,21 @@ def _backfill_rows_for(
 
     # de-dupe on (captured_at) so we never insert two rows at the same
     # timestamp for one repo (would violate the chart's per-day sum).
+    # ``forks`` is tied to anchor *type*, not to a timestamp comparison,
+    # so a brand-new repo where ``created_at == updated_at`` still records
+    # the correct ``forks`` value on the surviving "current" anchor.
     by_ts: dict[datetime, dict[str, object]] = {}
-    for ts, s_count in (
-        (created_dt, 0),
-        (seven_d, stars_7d_ago),
-        (one_d, stars_1d_ago),
-        (updated_dt, stars),
+    for ts, s_count, f_count in (
+        (created_dt, 0, 0),
+        (seven_d, stars_7d_ago, forks),
+        (one_d, stars_1d_ago, forks),
+        (updated_dt, stars, forks),
     ):
         by_ts[ts] = {
             "repo_id": repo_id,
             "captured_at": ts,
             "stars": int(s_count),
-            "forks": forks if ts != created_dt else 0,
+            "forks": int(f_count),
         }
     return list(by_ts.values())
 
@@ -152,6 +155,7 @@ def downgrade() -> None:
         sa.Column("id", sa.Integer, primary_key=True),
         sa.Column("created_at", sa.Date),
         sa.Column("updated_at", sa.Date),
+        sa.Column("forks", sa.Integer),
     )
     snap_t = sa.Table(
         "repo_star_snapshots",
@@ -159,28 +163,43 @@ def downgrade() -> None:
         sa.Column("id", sa.Integer, primary_key=True),
         sa.Column("repo_id", sa.Integer),
         sa.Column("captured_at", sa.DateTime),
+        sa.Column("forks", sa.Integer),
     )
 
     repos = bind.execute(
-        sa.select(repos_t.c.id, repos_t.c.created_at, repos_t.c.updated_at)
+        sa.select(
+            repos_t.c.id,
+            repos_t.c.created_at,
+            repos_t.c.updated_at,
+            repos_t.c.forks,
+        )
     ).fetchall()
 
     for repo in repos:
         created_at: object = repo.created_at
         updated_at: object = repo.updated_at
+        forks = int(repo.forks)
         created_dt = datetime.combine(created_at, _ANCHOR_TIME)  # type: ignore[arg-type]
         updated_dt = datetime.combine(updated_at, _ANCHOR_TIME)  # type: ignore[arg-type]
-        anchor_dts = {
-            created_dt,
-            updated_dt - timedelta(days=7),
-            updated_dt - timedelta(days=1),
-            updated_dt,
+        # Each anchor is paired with the forks value the upgrade wrote
+        # for it.  ``created_dt`` carries forks=0 (baseline); the other
+        # three carry the current ``repos.forks``.  Filtering by both
+        # ``captured_at`` and ``forks`` means a real cron snapshot that
+        # happens to land on an anchor timestamp but with a different
+        # forks count is preserved across rollback.
+        anchor_pairs: set[tuple[datetime, int]] = {
+            (created_dt, 0),
+            (updated_dt - timedelta(days=7), forks),
+            (updated_dt - timedelta(days=1), forks),
+            (updated_dt, forks),
         }
-        bind.execute(
-            snap_t.delete().where(
-                sa.and_(
-                    snap_t.c.repo_id == repo.id,
-                    snap_t.c.captured_at.in_(anchor_dts),
+        for ts, fk in anchor_pairs:
+            bind.execute(
+                snap_t.delete().where(
+                    sa.and_(
+                        snap_t.c.repo_id == repo.id,
+                        snap_t.c.captured_at == ts,
+                        snap_t.c.forks == fk,
+                    )
                 )
             )
-        )
