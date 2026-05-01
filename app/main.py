@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+import logging
+from collections.abc import AsyncIterator
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI
@@ -10,6 +13,12 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from app.db import SessionLocal, init_db
+from app.ingest.scheduler import (
+    build_scheduler,
+    reconcile_dangling_runs,
+    safe_start,
+    should_start,
+)
 from app.models import Repo
 from app.routes import charts, repos
 from app.seed import seed_into
@@ -18,10 +27,34 @@ BASE_DIR = Path(__file__).resolve().parent
 TEMPLATES_DIR = BASE_DIR / "templates"
 STATIC_DIR = BASE_DIR / "static"
 
+logger = logging.getLogger(__name__)
+
+
+@asynccontextmanager
+async def _lifespan(app: FastAPI) -> AsyncIterator[None]:
+    """Mount + tear down the ingest scheduler.
+
+    Stays inert when ``GITHUB_TOKEN`` is unset (dev / CI / tests).
+    """
+    scheduler = None
+    if should_start():
+        await reconcile_dangling_runs()
+        scheduler = build_scheduler()
+        safe_start(scheduler)
+        app.state.scheduler = scheduler
+        logger.info("ingest scheduler armed")
+    else:
+        logger.info("ingest scheduler dormant — GITHUB_TOKEN not set")
+    try:
+        yield
+    finally:
+        if scheduler is not None:
+            scheduler.shutdown(wait=False)
+
 
 def create_app() -> FastAPI:
     """Application factory used by ``uvicorn`` and tests."""
-    app = FastAPI(title="goodailist-clone", version="0.1.0")
+    app = FastAPI(title="goodailist-clone", version="0.2.0", lifespan=_lifespan)
 
     init_db()
 
