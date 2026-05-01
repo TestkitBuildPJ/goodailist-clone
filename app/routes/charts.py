@@ -25,6 +25,7 @@ from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 
 from app.db import get_session
+from app.freshness import compute_freshness
 from app.models import Repo, RepoStarSnapshot
 from app.routes.repos import CATEGORIES
 from app.schemas import ChartPoint, ChartSeries
@@ -136,6 +137,8 @@ def charts_page(
         "charts.html",
         {
             "series": [s.model_dump(mode="json") for s in series],
+            "freshness": compute_freshness(session),
+            "active": "charts",
         },
     )
 

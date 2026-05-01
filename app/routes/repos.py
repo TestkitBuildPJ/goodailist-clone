@@ -11,6 +11,7 @@ from sqlalchemy import asc, desc
 from sqlalchemy.orm import Session
 
 from app.db import get_session
+from app.freshness import compute_freshness
 from app.models import Repo
 from app.schemas import ReadRepo
 
@@ -98,6 +99,8 @@ def repos_page(
             "selected_category": category or "",
             "sort": sort,
             "order": order,
+            "freshness": compute_freshness(session),
+            "active": "repos",
         },
     )
 

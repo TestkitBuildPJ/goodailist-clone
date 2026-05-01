@@ -21,7 +21,50 @@
       </div>
     </header>
     <main class="max-w-7xl mx-auto px-4 py-6">
+      {% if freshness and freshness.is_stale %}
+      <div
+        role="alert"
+        data-test="stale-banner"
+        class="mb-4 rounded border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900"
+      >
+        <strong class="font-semibold">Heads up — data may be stale.</strong>
+        Last refresh was
+        {% if freshness.hours_ago is not none %}
+          ~{{ freshness.hours_ago | round(1) }} hour{{ 's' if freshness.hours_ago | round(1) != 1.0 else '' }} ago
+        {% else %}
+          never
+        {% endif %}
+        (threshold: 24 hours). The daily ingest cron may have failed; an
+        operator can trigger <code class="font-mono text-xs">POST /admin/refresh</code>.
+      </div>
+      {% endif %}
       {% block content %}{% endblock %}
     </main>
+    <footer
+      data-test="data-source-footer"
+      class="mt-8 border-t border-slate-200 bg-white"
+    >
+      <div class="max-w-7xl mx-auto px-4 py-4 text-xs text-slate-500 flex flex-wrap items-center gap-x-4 gap-y-1">
+        <span>
+          Data sourced from
+          <a href="https://github.com/" class="underline hover:text-slate-700"
+             target="_blank" rel="noopener noreferrer">github.com</a>.
+        </span>
+        {% if freshness and freshness.has_snapshots %}
+          <span data-test="last-refresh">
+            Last refresh:
+            {% if freshness.hours_ago is not none and freshness.hours_ago < 1.0 %}
+              <strong class="text-slate-700">just now</strong>
+            {% else %}
+              <strong class="text-slate-700">~{{ freshness.hours_ago | round(1) }} hour{{ 's' if freshness.hours_ago | round(1) != 1.0 else '' }} ago</strong>
+            {% endif %}
+            (UTC&nbsp;{{ freshness.last_captured_at.strftime('%Y-%m-%d %H:%M') }})
+          </span>
+        {% else %}
+          <span data-test="last-refresh">No snapshots yet — chart uses Phase A anchor approximation.</span>
+        {% endif %}
+        <span class="ml-auto">VibecodeKit Hybrid Ultra v0.19.0</span>
+      </div>
+    </footer>
   </body>
 </html>
