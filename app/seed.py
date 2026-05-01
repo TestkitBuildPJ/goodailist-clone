@@ -7,7 +7,7 @@ keeps Phase A simple — Phase B will switch to incremental upsert.
 from __future__ import annotations
 
 import json
-from datetime import date
+from datetime import date, datetime, time, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -15,7 +15,7 @@ from sqlalchemy.engine import Engine
 from sqlalchemy.orm import Session
 
 from app.db import Base, SessionLocal, get_engine, init_db
-from app.models import Repo
+from app.models import Repo, RepoStarSnapshot
 
 SEED_PATH = Path(__file__).resolve().parent.parent / "seed_data" / "repos.json"
 
@@ -60,6 +60,55 @@ def seed_into(session: Session, payload: list[dict[str, Any]] | None = None) -> 
     session.add_all(repos)
     session.commit()
     return len(repos)
+
+
+_BACKFILL_ANCHOR_TIME = time(3, 0)  # 03:00 UTC, matches cron default
+
+
+def backfill_anchors_into(session: Session) -> int:
+    """Synthesise 4 ``repo_star_snapshots`` rows per repo from Phase A anchors.
+
+    Mirrors the ``0003_phase_b_backfill`` Alembic migration but runs
+    against an ORM session so we can call it directly at startup
+    without invoking the alembic CLI.  Same idempotency guarantees:
+    repos that already have at least one snapshot row are skipped.
+
+    Returns the number of snapshot rows actually inserted.
+    """
+    from sqlalchemy import select
+
+    repos_with_snapshots: set[int] = set(
+        session.scalars(select(RepoStarSnapshot.repo_id).distinct()).all()
+    )
+    inserted = 0
+    for repo in session.query(Repo).all():
+        if int(repo.id) in repos_with_snapshots:
+            continue
+        forks = int(repo.forks)
+        created_dt = datetime.combine(repo.created_at, _BACKFILL_ANCHOR_TIME)
+        updated_dt = datetime.combine(repo.updated_at, _BACKFILL_ANCHOR_TIME)
+        # Same dedupe-by-timestamp rule as migration 0003: collapse anchors
+        # whose computed datetime collides into a single row.
+        by_ts: dict[datetime, tuple[int, int]] = {}
+        for ts, s_count, f_count in (
+            (created_dt, 0, 0),
+            (updated_dt - timedelta(days=7), int(repo.stars_7d_ago), forks),
+            (updated_dt - timedelta(days=1), int(repo.stars_1d_ago), forks),
+            (updated_dt, int(repo.stars), forks),
+        ):
+            by_ts[ts] = (s_count, f_count)
+        for ts, (s_count, f_count) in by_ts.items():
+            session.add(
+                RepoStarSnapshot(
+                    repo_id=int(repo.id),
+                    captured_at=ts,
+                    stars=s_count,
+                    forks=f_count,
+                )
+            )
+            inserted += 1
+    session.commit()
+    return inserted
 
 
 def reset_and_seed(engine: Engine | None = None) -> int:

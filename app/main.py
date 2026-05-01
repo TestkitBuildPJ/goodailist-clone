@@ -19,9 +19,9 @@ from app.ingest.scheduler import (
     safe_start,
     should_start,
 )
-from app.models import Repo
+from app.models import Repo, RepoStarSnapshot
 from app.routes import admin, charts, repos
-from app.seed import seed_into
+from app.seed import backfill_anchors_into, seed_into
 
 BASE_DIR = Path(__file__).resolve().parent
 TEMPLATES_DIR = BASE_DIR / "templates"
@@ -59,9 +59,14 @@ def create_app() -> FastAPI:
     init_db()
 
     # Seed once if empty so a fresh container has data on first request.
+    # Also synthesise the 4 Phase A anchor snapshots if no snapshot row
+    # exists yet — gives ``/charts`` a real time-series even before the
+    # first cron tick lands (or when running without a GITHUB_TOKEN).
     with SessionLocal() as session:
         if session.query(Repo).count() == 0:
             seed_into(session)
+        if session.query(RepoStarSnapshot.id).first() is None:
+            backfill_anchors_into(session)
 
     templates = Jinja2Templates(directory=str(TEMPLATES_DIR))
     app.state.templates = templates
