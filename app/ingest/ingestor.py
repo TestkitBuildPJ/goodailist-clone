@@ -125,10 +125,13 @@ async def run_once(
                 if repo is None:
                     continue
                 if fetch.cached:
-                    # 304 — re-record the last known counts so the chart still
-                    # has a fresh data point.  Stars unchanged on GitHub side.
+                    # 304 — stars unchanged on GitHub side.  Advance
+                    # ``stars_1d_ago`` to the current value so the table delta
+                    # reflects "no change in last 24h" instead of staying
+                    # frozen on the previous non-304 day.
                     snapshot_stars = int(repo.stars)
                     snapshot_forks = int(repo.forks)
+                    repo.stars_1d_ago = int(repo.stars)
                 else:
                     assert fetch.stars is not None and fetch.forks is not None
                     # Advance 7d-ago from snapshots ≥ 7 days old (best-effort).

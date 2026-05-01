@@ -219,5 +219,45 @@ async def test_run_once_aborts_on_rate_limit_but_finalizes(engine: Engine) -> No
         assert run.status == "failed"
 
 
+@respx.mock
+async def test_run_once_advances_stars_1d_ago_on_304(engine: Engine) -> None:
+    """On a 304 (cached) tick, ``stars_1d_ago`` should advance to current ``stars``.
+
+    Regression: previously the 304 path left ``stars_1d_ago`` frozen at the
+    last 200's value, so the table 1-day delta stayed permanently equal to
+    the most recent positive change instead of decaying to 0 once the repo
+    stopped receiving updates.
+    """
+    Maker = _seeded_maker(engine)
+    store = EtagStore()
+
+    with Maker() as s:
+        first = s.query(Repo).order_by(Repo.id).first()
+        assert first is not None
+        repo_id = int(first.id)
+        # simulate yesterday's 200: stars=200, stars_1d_ago was 150 (delta +50)
+        first.stars = 200
+        first.stars_1d_ago = 150
+        s.commit()
+        owner, name = str(first.org), str(first.name)
+        rest = [(r.id, r.org, r.name) for r in s.query(Repo).filter(Repo.id != repo_id).all()]
+
+    # Today: GitHub returns 304 for our repo (no change)…
+    store.set(owner, name, '"warm"')
+    respx.get(f"{GITHUB_API}/repos/{owner}/{name}").mock(return_value=httpx.Response(304))
+    for _id, o, n in rest:
+        _mock_repo_200(o, n, stars=1, forks=0)
+
+    await run_once(store=store, sessionmaker_factory=Maker)
+
+    with Maker() as s:
+        repo = s.get(Repo, repo_id)
+        assert repo is not None
+        assert repo.stars == 200  # unchanged
+        # advanced from 150 → 200 so today's 1d delta = 0, not +50.
+        assert repo.stars_1d_ago == 200
+        assert repo.stars_1d_delta == 0
+
+
 # Suppress "untested" pytest collection warnings for type stubs.
 _ = pytest
